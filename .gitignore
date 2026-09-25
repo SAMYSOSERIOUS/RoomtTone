@@ -1,4 +1,9 @@
-data/*.parquet
-data/results.json
+data/*/*.parquet
+data/*/results.json
+data/all_sources.json
+data/dash.json
+store/
+store.tar.gz
 __pycache__/
 .pytest_cache/
+*.pyc

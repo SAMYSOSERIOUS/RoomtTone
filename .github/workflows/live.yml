@@ -1,0 +1,78 @@
+name: Live hourly run
+
+# Every hour: collect a slice of Bluesky's free live stream (and Mastodon; Reddit/YouTube if secrets are set),
+# add it to a rolling 72-hour store kept on the `roomtone-data` branch, run the pipeline, deploy.
+# Turn it on: Settings -> Secrets and variables -> Actions -> Variables -> ROOMTONE_LIVE = true
+# Optional secrets: REDDIT_ID, REDDIT_SECRET, YOUTUBE_KEY.
+# The first 48 hours fill the store; steering verdicts and the forecast appear once there is enough history.
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: live
+  cancel-in-progress: false
+
+jobs:
+  live:
+    if: ${{ vars.ROOMTONE_LIVE == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      HOLLOWCAST_KEY: ${{ secrets.ROOMTONE_KEY }}
+      ROOMTONE_KEY: ${{ secrets.ROOMTONE_KEY }}
+      REDDIT_ID: ${{ secrets.REDDIT_ID }}
+      REDDIT_SECRET: ${{ secrets.REDDIT_SECRET }}
+      YOUTUBE_KEY: ${{ secrets.YOUTUBE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt Mastodon.py praw google-api-python-client
+      - name: Restore the rolling store
+        run: |
+          git fetch origin roomtone-data:roomtone-data || true
+          git show roomtone-data:store.tar.gz > store.tar.gz 2>/dev/null && tar xzf store.tar.gz || echo "no store yet"
+      - name: Collect this hour
+        run: |
+          python -m roomtone.collect --hours 0.4 --source bluesky
+          timeout 20m python -m roomtone.collect --hours 0.3 --source mastodon || true
+          [ -n "$REDDIT_ID" ]   && timeout 20m python -m roomtone.collect --hours 0.3 --source reddit  || true
+          [ -n "$YOUTUBE_KEY" ] && timeout 10m python -m roomtone.collect --hours 0.1 --source youtube || true
+      - name: Roll the store (keep 72 h) and run the pipeline
+        run: |
+          python scripts/roll.py
+          python -m roomtone.pipeline $(ls store) || python -m roomtone.pipeline bluesky
+          python -m roomtone.rt_export
+          python tools/unpack_design.py design/Roomtone_Dashboard.html
+      - name: Save the rolling store
+        run: |
+          tar czf store.tar.gz store
+          git config user.name "roomtone-bot" && git config user.email "roomtone-bot@users.noreply.github.com"
+          git checkout --orphan roomtone-data-new
+          git rm -rf --cached . >/dev/null 2>&1 || true
+          git add -f store.tar.gz
+          git commit -m "rolling store $(date -u +%FT%TZ)" -q
+          git branch -M roomtone-data
+          git push -f origin roomtone-data
+          git checkout -f main
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+  deploy:
+    needs: live
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
