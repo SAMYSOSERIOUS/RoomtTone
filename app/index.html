@@ -594,7 +594,7 @@ button{font-family:inherit}
           <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Inside #{{ topic }}</div>
           <div style="font-size:14px;color:#4d5966;line-height:1.5">Sub-topics of the selected topic, with the share of human attention each one lost. Pick one to see what its automated-looking posts look like.</div>
         </div>
-        <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#b8461b;border:1px solid rgba(235,104,52,.45);padding:5px 8px;border-radius:6px;white-space:nowrap">Prototype split · not in results.json yet</div>
+        <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#1d5aa6;border:1px solid rgba(42,120,214,.4);padding:5px 8px;border-radius:6px;white-space:nowrap">Split from results.json</div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
         <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
@@ -1023,7 +1023,7 @@ const VSTYLE={
 };
 const IMPN={ai_phrase_rate:"Stock phrases",rhythm_cv:"Posting rhythm",posts_per_day:"Posts per day",regret_rate:"Regret rate (deletes)",sleep_gap_h:"Sleep gap",signup_wave:"Sign-up wave"};
 function hl(h){const d=Math.floor(h/24)+1,hr=((h%24)+24)%24,ap=hr<12?"am":"pm",h12=hr%12===0?12:hr%12;return "day "+d+", "+h12+ap;}
-function pct(v,dp){return (v*100).toFixed(dp==null?0:dp)+"%";}
+function pct(v,dp){return (v==null||!isFinite(v))?"–":(v*100).toFixed(dp==null?0:dp)+"%";}
 function fmt(n){return Number(n).toLocaleString("en-US");}
 function sgn(v){return (v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(2);}
 function rib(xa,a0,a1,xb,b0,b1){const m=(xa+xb)/2;return `M${xa},${a0}C${m},${a0} ${m},${b0} ${xb},${b0}L${xb},${b1}C${m},${b1} ${m},${a1} ${xa},${a1}Z`;}
@@ -1084,7 +1084,7 @@ function makeSource(base,S){
   const flow=flowFrom(f,f.origin_to_audience.map(z=>({...z,accounts:Math.round(z.accounts*me)})),Object.fromEntries(Object.entries(f.humans_targeted_by_replies).map(([k,v])=>[k,Math.round(v*sc)])),f.destinations.map(d=>({...d,bot_links:Math.round(d.bot_links*me),human_links:Math.max(1,Math.round(d.human_links*sc))})));
   const v=S.val,bv=base.validation;
   return {...base,series,prev_wb:cl(base.prev_wb*mAvg*0.95),ghost_by_hour:gh,immune:imm,trend_peak:tp,audience_topics:at,leadlag:ll,regions,flow,
-    headline:{...hd,human_engagements_last_24h:eng,to_automated_last_24h:Math.round(eng*wb),wasted_breath_last_24h:wb,one_in:Math.round(1/wb),peak_hour:peakOf(series,T,base.H),accounts:{total:tot,automated:aut,helper:hel,human:tot-aut-hel},ghost_made_trends:SUMA(gh)},
+    headline:{...hd,human_engagements_last_24h:eng,to_automated_last_24h:Math.round(eng*wb),wasted_breath_last_24h:wb,one_in:(wb>0?Math.round(1/wb):0),peak_hour:peakOf(series,T,base.H),accounts:{total:tot,automated:aut,helper:hel,human:tot-aut-hel},ghost_made_trends:SUMA(gh)},
     validation:{...bv,n_test:v[0],n_train:Math.round(v[0]*2.33),precision_at_threshold:v[1],recall_at_threshold:v[2],false_alarm_rate:v[3],timezone_within_2h:v[4],timezone_accounts_checked:Math.round(bv.timezone_accounts_checked*sc)},
     sleeper:S.sleeper?base.sleeper.map(c=>({...c,accounts:Math.round(c.accounts*mAvg)})):[]};
 }
@@ -1103,7 +1103,7 @@ function mergeSources(base,L){
   const cells=L.flatMap(x=>x.sleeper).sort((a,b)=>b.accounts-a.accounts);
   return {...base,series,prev_wb:SUMA(L.map((x,i)=>x.prev_wb*w[i]))/eng,ghost_by_hour:gh,immune:imm,audience_topics:at,leadlag:ll,flow,
     regions:{...base.regions,origin_by_audience:sr(base.regions.origin_by_audience,x=>x.regions.origin_by_audience),mismatch:sr(base.regions.mismatch,x=>x.regions.mismatch)},
-    headline:{...base.headline,human_engagements_last_24h:eng,to_automated_last_24h:to,wasted_breath_last_24h:wb,one_in:Math.round(1/wb),peak_hour:peakOf(series,T,H),accounts:{total:acc("total"),automated:acc("automated"),helper:acc("helper"),human:acc("human")},ghost_made_trends:SUMA(gh),official_trend_slots:base.headline.official_trend_slots*L.length},
+    headline:{...base.headline,human_engagements_last_24h:eng,to_automated_last_24h:to,wasted_breath_last_24h:wb,one_in:(wb>0?Math.round(1/wb):0),peak_hour:peakOf(series,T,H),accounts:{total:acc("total"),automated:acc("automated"),helper:acc("helper"),human:acc("human")},ghost_made_trends:SUMA(gh),official_trend_slots:base.headline.official_trend_slots*L.length},
     validation:{...base.validation,n_test:nt,n_train:SUMA(L.map(x=>x.validation.n_train)),precision_at_threshold:wv("precision_at_threshold"),recall_at_threshold:wv("recall_at_threshold"),false_alarm_rate:wv("false_alarm_rate"),timezone_within_2h:wv("timezone_within_2h"),timezone_accounts_checked:SUMA(L.map(x=>x.validation.timezone_accounts_checked))},
     sleeper:cells.slice(0,1)};
 }
@@ -1259,7 +1259,7 @@ class Component extends DCLogic {
     const s=this.state,H=RT.H,hd=RT.headline,v=RT.validation,tab=s.tab??0,showChecks=this.props.showChecks??true;
     const X=h=>CL+h*CW/(H-1),Y=val=>CT+CH*(1-val/0.8);
     const at=(l,t)=>RT.audience_topics.find(r=>r.lang===l&&r.topic===t),ll=(l,t)=>RT.leadlag.find(r=>r.lang===l&&r.topic===t);
-    const prevOneIn=Math.round(1/RT.prev_wb),down=hd.wasted_breath_last_24h<RT.prev_wb;
+    const prevOneIn=(RT.prev_wb>0?Math.round(1/RT.prev_wb):0),down=hd.wasted_breath_last_24h<RT.prev_wb;
     const imm=RT.immune.find(i=>i.spike),cell=RT.sleeper[0];
     const pubFc=Object.entries(RT.forecast).filter(([k,f])=>f.grade&&f.grade.publishable);
     const bestFc=Object.entries(RT.forecast).filter(([k,f])=>f.grade&&f.grade.skill_vs_naive!=null).sort((a,b)=>b[1].grade.skill_vs_naive-a[1].grade.skill_vs_naive)[0];
@@ -1282,9 +1282,9 @@ class Component extends DCLogic {
     const tabs=[{i:4,num:"00",q:"All datasets"},...TABQ.map((q,i)=>({i,num:"0"+(i+1),q}))].map(o=>({...o,onClick:()=>this.setTab(o.i),line:o.i===tab?INK:"transparent",color:o.i===tab?INK:MUTED}));
     const SRCS=[{key:"all",name:"All sources",live:true},...SOURCES],curS=SRCS.find(z=>z.key===(s.source||"all"));
     const srcSeg=SRCS.map(z=>{const sel=z.key===curS.key;return {name:z.name,onClick:()=>this.setSource(z.key),bg:sel?"#fff":"transparent",color:sel?INK:MUTED,sh:sel?"0 1px 2px rgba(16,22,29,.12)":"none",dot:z.key==="all"?INK:z.live?"#2f9a5f":"transparent",dotStyle:z.live||z.key==="all"?"solid":"dashed",dotBorder:z.key==="all"?INK:z.live?"#2f9a5f":"#8a96a3"};});
-    const srcNote=curS.key==="all"?`4 sources combined, weighted by human engagements · ${fmt(hd.human_engagements_last_24h)} engagements in 24 h`:curS.live?"Live · Jetstream firehose (practice stream this run)":"Prototype · modelled from the Bluesky run to show the filter, not collected";
-    const srcShort=curS.key==="all"?"ALL SOURCES":curS.name.toUpperCase()+(curS.live?"":" · PROTOTYPE");
-    const out={ready:true,srcSeg,srcNote,srcShort,isT4:tab===4,showChecks,H,oneIn:hd.one_in,lastRun:hl(H),deltaText:`${down?"↓":"↑"} from 1 in ${prevOneIn} yesterday · ${pct(RT.prev_wb,1)} → ${pct(hd.wasted_breath_last_24h,1)}`,changes,tiles,tabs,
+    const srcNote=curS.key==="all"?`4 sources combined, weighted by human engagements · ${fmt(hd.human_engagements_last_24h)} engagements in 24 h`:curS.live?"Live · Jetstream firehose (practice stream this run)":(curS.practice?"Practice stream · collected and scored by the same pipeline, not real accounts yet":"Prototype · modelled from the Bluesky run to show the filter, not collected");
+    const srcShort=curS.key==="all"?"ALL SOURCES":curS.name.toUpperCase()+(curS.live?"":curS.practice?" · PRACTICE":" · PROTOTYPE");
+    const out={ready:true,srcSeg,srcNote,srcShort,isT4:tab===4,showChecks,H,oneIn:(hd.one_in>0&&isFinite(hd.one_in)?hd.one_in:"?"),lastRun:hl(H),deltaText:(hd.human_engagements_last_24h>0&&RT.prev_wb>0?`${down?"↓":"↑"} from 1 in ${prevOneIn} yesterday · ${pct(RT.prev_wb,1)} → ${pct(hd.wasted_breath_last_24h,1)}`:"collecting · not enough data yet"),changes,tiles,tabs,
       isT0:tab===0,isT1:tab===1,isT2:tab===2,isT3:tab===3,heroRef:this.heroRef,heroWrap:this.heroWrap,countRef:this.countRef,globeRef:this.globeRef,flowRef:this.flowRef,chartRef:this.chartRef,
       threshold:v.threshold,precision:pct(v.precision_at_threshold,1),topic:s.topic,method:v.method};
     const xTicks=[];for(let h=0;h<H;h+=12)xTicks.push({x:X(h),label:h%24===0?"Day "+(h/24+1):"noon"});out.xTicks=xTicks;

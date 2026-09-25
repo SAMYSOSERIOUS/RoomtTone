@@ -56,7 +56,7 @@ def infer_timezone(ev: pd.DataFrame, min_events: int = 12, window: int = 8, awak
         tz = round(awake_centre_local - centre_utc)
         tz = ((tz + 12) % 24) - 12
         rows.append(dict(account=acc, tz=int(tz), sleeps=True, quiet_share=round(float(quiet_share), 3)))
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=["account", "tz", "sleeps", "quiet_share"])
 
 
 def _longest_quiet(prof):
@@ -80,6 +80,10 @@ def audience_language(ev: pd.DataFrame) -> pd.Series:
 
 def origin_vs_audience(tzs: pd.DataFrame, langs: pd.Series, groups: pd.Series) -> pd.DataFrame:
     """Group totals: for each audience language and account group, where do the accounts really sleep?"""
+    empty_out = pd.DataFrame(columns=["lang", "group", "region", "accounts", "share"])
+    empty_mism = pd.DataFrame(columns=["lang", "group", "accounts", "mismatch_rate", "never_sleeps_rate"])
+    if tzs.empty:
+        return empty_out, empty_mism
     df = tzs.merge(langs.rename("lang"), left_on="account", right_index=True, how="left")
     df["group"] = df.account.map(groups).fillna("unknown")
     df["region"] = df.tz.map(_region)
@@ -95,7 +99,7 @@ def origin_vs_audience(tzs: pd.DataFrame, langs: pd.Series, groups: pd.Series) -
     mism = df.groupby(["lang", "group"]).agg(accounts=("account", "size"), mismatch_rate=("mismatch", "mean"),
                                             never_sleeps_rate=("sleeps", lambda s: 1 - s.mean())).reset_index()
     mism = mism[mism.accounts >= MIN_GROUP].round(3)
-    return out, mism
+    return (out if len(out) else empty_out), (mism if len(mism) else empty_mism)
 
 
 def _region(tz):
@@ -125,7 +129,7 @@ def audience_topic_table(ev: pd.DataFrame, groups: pd.Series, t0: float) -> pd.D
         rows.append(dict(lang=lang, topic=topic, human_accounts=int(hum.account.nunique()), automated_accounts=int(bot.account.nunique()),
                          automated_share=round(len(bot) / len(g), 3), human_mood=round(float(hum.mood.mean()), 3),
                          bot_mood=round(float(bot.mood.mean()), 3) if len(bot) else None))
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=["lang", "topic", "human_accounts", "automated_accounts", "automated_share", "human_mood", "bot_mood"])
 
 
 def mood_leadlag(ev: pd.DataFrame, groups: pd.Series, t0: float, lang: str, topic: str, max_lag: int = 8) -> dict:

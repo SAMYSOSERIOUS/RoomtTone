@@ -53,3 +53,18 @@ def test_redaction_blacks_out_personal_details():
     for leak in ("anna.k@", "2345678", "anna_k92", "Jonas", "/p/1"):
         assert leak not in out
     assert BAR in out and "truth-now.example" in out
+
+
+def test_pipeline_survives_thin_live_data(tmp_path, monkeypatch):
+    """A first live run has minutes of data, no labels and few accounts: every stage must degrade, not crash."""
+    import pandas as pd, numpy as np, json
+    from roomtone import pipeline
+    monkeypatch.chdir(tmp_path)
+    d = tmp_path / "data" / "bluesky"; d.mkdir(parents=True)
+    now = 1_800_000_000.0
+    rows = [dict(kind="post", ts=now + i * 30, account=f"did:plc:x{i % 7}", target_account=None, uri=f"u{i}", text=f"hello election {i}", topic="election", lang="en") for i in range(40)]
+    rows += [dict(kind="account_created", ts=now, account=f"did:plc:x{i}", declared_bot=False, created_at=now - 86400 * 30, lang="en") for i in range(7)]
+    pd.DataFrame(rows).to_parquet(d / "events.parquet", index=False)
+    pd.DataFrame([dict(hour=0, topic="election", posts=40, rank=1)]).to_parquet(d / "official_trends.parquet", index=False)
+    r = pipeline.run("bluesky")
+    assert r["headline"]["accounts"]["total"] >= 0 and "flow" in r and json.dumps(r, default=float)

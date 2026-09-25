@@ -63,6 +63,12 @@ def main(path, out=Path("app")):
     app = app.replace('stColor:S.live?"#1f6e43":"#b8461b"', 'stColor:S.live?"#1f6e43":(S.practice?"#1d5aa6":"#b8461b")')
     app = app.replace('stBorder:S.live?"rgba(47,154,95,.35)":"rgba(235,104,52,.5)"', 'stBorder:S.live?"rgba(47,154,95,.35)":(S.practice?"rgba(42,120,214,.4)":"rgba(235,104,52,.5)")')
     app = app.replace('].slice(0,8).map((c,i)=>({...c,n:String(i+1).padStart(2,"0")}));', ',...((RT.extra_changes||[]).map(t=>({rule:"cross-source",text:t})))].slice(0,8).map((c,i)=>({...c,n:String(i+1).padStart(2,"0")}));')
+    # thin or early live data: never show "1 in Infinity"; say what is missing instead
+    app = app.replace('function pct(v,dp){return (v*100).toFixed(dp==null?0:dp)+"%";}', 'function pct(v,dp){return (v==null||!isFinite(v))?"–":(v*100).toFixed(dp==null?0:dp)+"%";}')
+    app = app.replace('one_in:Math.round(1/wb)', 'one_in:(wb>0?Math.round(1/wb):0)')
+    app = app.replace('const prevOneIn=Math.round(1/RT.prev_wb)', 'const prevOneIn=(RT.prev_wb>0?Math.round(1/RT.prev_wb):0)')
+    app = app.replace('oneIn:hd.one_in,', 'oneIn:(hd.one_in>0&&isFinite(hd.one_in)?hd.one_in:"?"),')
+    app = app.replace('deltaText:`${down?"↓":"↑"} from 1 in ${prevOneIn} yesterday · ${pct(RT.prev_wb,1)} → ${pct(hd.wasted_breath_last_24h,1)}`', 'deltaText:(hd.human_engagements_last_24h>0&&RT.prev_wb>0?`${down?"↓":"↑"} from 1 in ${prevOneIn} yesterday · ${pct(RT.prev_wb,1)} → ${pct(hd.wasted_breath_last_24h,1)}`:"collecting · not enough data yet")')
     app, n2 = re.subn(r'const S=SUBS\[s\.topic\]\|\|\[\]', 'const S=(RT.subs&&RT.subs[s.topic]&&RT.subs[s.topic].length?RT.subs[s.topic]:SUBS[s.topic])||[]', app)
     app, n3 = re.subn(r'\(window\.__resources&&window\.__resources\.landJson\)\|\|"https://cdn\.jsdelivr\.net/npm/world-atlas@2/land-110m\.json"', '"assets/land-110m.json"', app)
     app = app.replace("PROTOTYPE SPLIT · NOT IN RESULTS.JSON YET", "SPLIT FROM RESULTS.JSON")

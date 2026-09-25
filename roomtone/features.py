@@ -36,8 +36,9 @@ def account_features(ev: pd.DataFrame) -> pd.DataFrame:
                          posts_per_day=n / max(1.0, (ts[-1] - ts[0]) / 86400),
                          declared_bot=bool(created.declared_bot.get(acc, False)) if "declared_bot" in created else False,
                          created_at=float(created.created_at.get(acc, np.nan)) if "created_at" in created else np.nan))
-    f = pd.DataFrame(rows)
+    f = pd.DataFrame(rows, columns=["account", "n_posts", "rhythm_cv", "sleep_gap_h", "regret_rate", "ai_phrase_rate", "posts_per_day", "declared_bot", "created_at"])
     if f.empty:
+        f["signup_wave"] = pd.Series(dtype=float)
         return f
     # sign-up wave: how many other accounts were created within the same 24h as this one
     if f.created_at.notna().any():

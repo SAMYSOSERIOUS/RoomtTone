@@ -29,27 +29,34 @@ def dataset(source: str, H: int | None = None) -> dict:
     groups = sc.set_index("account").group
     t0 = r["t0"]
     wb = pd.DataFrame(r["wasted_breath"]); tr = pd.DataFrame(r["trends"])
-    topics = [t for t in sorted(ev.topic.dropna().unique()) if t != "other"]
-    H = H or int(wb.hour.max()) + 1
+    topics = [t for t in sorted(ev.topic.dropna().unique()) if t != "other"] if "topic" in ev else []
+    H = H or (int(wb.hour.max()) + 1 if len(wb) else max(1, int(r.get("hours", 1))))
     series = {t: [None] * H for t in topics}
     for _, x in wb.iterrows():
         if x.topic in series and 0 <= int(x.hour) < H:
             series[x.topic][int(x.hour)] = None if pd.isna(x.wasted_breath) else round(float(x.wasted_breath), 3)
-    ghost = tr.groupby("hour").ghost_made.sum().reindex(range(H), fill_value=0).astype(int).tolist()
+    ghost = tr.groupby("hour").ghost_made.sum().reindex(range(H), fill_value=0).astype(int).tolist() if len(tr) else [0] * H
     # previous-day wasted breath
     eng = ev[ev.kind.isin(["reply", "like"]) & ev.target.notna()].copy()
     eng["fg"] = eng.account.map(groups); eng["tg"] = eng.target.map(groups); eng = eng[eng.fg == "human"]
     eng["hour"] = ((eng.ts - t0) // 3600).astype(int)
     prev = eng[(eng.hour >= eng.hour.max() - 47) & (eng.hour < eng.hour.max() - 23)]
-    prev_wb = float((prev.tg == "automated").mean()) if len(prev) else r["headline"]["wasted_breath_last_24h"]
+    prev_wb = float((prev.tg == "automated").mean()) if len(prev) else (r["headline"]["wasted_breath_last_24h"] or 0.0)
     # trend peak: the hour where the official list is most automated
     posts = ev[ev.kind.isin(["post", "reply"])].copy(); posts["hour"] = ((posts.ts - t0) // 3600).astype(int); posts["grp"] = posts.account.map(groups).fillna("unknown")
     peak = int(tr.loc[tr.automated_share.fillna(0).idxmax()].hour) if len(tr) else 0
-    ph = tr[tr.hour == peak].sort_values("official_rank")
+    ph = tr[tr.hour == peak].sort_values("official_rank") if len(tr) else tr
     official = [dict(topic=x.topic, share=round(float(x.automated_share or 0), 3), ghost=bool(x.ghost_made), posts=int(x.official_posts)) for _, x in ph.iterrows()]
-    hp = posts[(posts.hour == peak) & (posts.grp == "human")].groupby("topic").agg(n=("account", "size"), ppl=("account", "nunique"))
+    hp = posts[(posts.hour == peak) & (posts.grp == "human")].groupby("topic").agg(n=("account", "size"), ppl=("account", "nunique")) if len(posts) else pd.DataFrame(columns=["n", "ppl"])
     real = [t for t, row in hp.sort_values("n", ascending=False).iterrows() if t != "other" and row.ppl >= MIN_GROUP][:3]
-    langs = sorted(set(x["lang"] for x in r["audience_topics"]))
+    hd = r["headline"]
+    hd["wasted_breath_last_24h"] = hd.get("wasted_breath_last_24h") or 0.0
+    hd["one_in"] = hd.get("one_in") or 0
+    for k in ("total", "human", "automated", "helper"):
+        hd["accounts"][k] = int(hd["accounts"].get(k, 0))
+    if not hd.get("peak_hour"):
+        hd["peak_hour"] = dict(topic=topics[0] if topics else "none", hour=0, human_engagements=0, to_automated=0, n_humans=0, wasted_breath=0.0)
+    langs = sorted(set(x["lang"] for x in r["audience_topics"])) or ["und"]
     out = dict(
         H=H, topics=topics, min_group=MIN_GROUP, generated_at=r["generated_at"], headline=r["headline"], prev_wb=round(prev_wb, 4),
         validation=r["validation"], series=series, ghost_by_hour=ghost, trend_peak=dict(hour=peak, official=official, real=real),
@@ -137,12 +144,14 @@ def combined(base: dict, datasets: dict) -> dict:
     out["ghost_by_hour"] = [sum(d["ghost_by_hour"][h] for d in L) for h in range(H)]
     hd = out["headline"]
     hd["human_engagements_last_24h"] = sum(w); hd["to_automated_last_24h"] = sum(d["headline"]["to_automated_last_24h"] for d in L)
-    hd["wasted_breath_last_24h"] = round(hd["to_automated_last_24h"] / eng, 4); hd["one_in"] = int(round(1 / max(hd["wasted_breath_last_24h"], 1e-6)))
+    hd["wasted_breath_last_24h"] = round(hd["to_automated_last_24h"] / eng, 4) if sum(w) else 0.0
+    hd["one_in"] = int(round(1 / hd["wasted_breath_last_24h"])) if hd["wasted_breath_last_24h"] > 0 else 0
     for k in ("total", "human", "automated", "helper"):
         hd["accounts"][k] = sum(d["headline"]["accounts"].get(k, 0) for d in L)
     hd["ghost_made_trends"] = sum(d["headline"]["ghost_made_trends"] for d in L); hd["official_trend_slots"] = sum(d["headline"]["official_trend_slots"] for d in L)
     out["prev_wb"] = round(sum(d["prev_wb"] * wi for d, wi in zip(L, w)) / eng, 4)
     v = out["validation"]; nt = sum(d["validation"].get("n_test", 0) for d in L) or 1
+    v["importance"] = v.get("importance") or {}
     for k in ("precision_at_threshold", "recall_at_threshold", "false_alarm_rate", "auc"):
         v[k] = round(sum(d["validation"].get(k, 0) * d["validation"].get("n_test", 0) for d in L) / nt, 4)
     v["n_test"] = nt; v["n_train"] = sum(d["validation"].get("n_train", 0) for d in L)
@@ -162,7 +171,7 @@ def combined(base: dict, datasets: dict) -> dict:
             sub["ex"] = ex[:3]
             gallery += ex[:2]
     out["gallery"] = sorted(gallery, key=lambda e: -(e[5] + e[6]))[:24]
-    out["contagion"] = contagion(datasets, base["flow"]["topic"])
+    out["contagion"] = contagion(datasets, base["flow"]["topic"]) if T else dict(topic=None, sentence="No topic data yet.")
     out["extra_changes"] = [out["contagion"]["sentence"]]
     return out
 

@@ -72,18 +72,21 @@ def run(source: str = "bluesky"):
     subs = subtopics(ev, scored, t0, practice=truth is not None)
 
     # 5. headline numbers (last full day)
-    last_day = wb[wb.hour >= wb.hour.max() - 23]
-    eng, to_auto = last_day.human_engagements.sum(), last_day.to_automated.sum()
+    last_day = wb[wb.hour >= wb.hour.max() - 23] if len(wb) else wb
+    eng, to_auto = int(last_day.human_engagements.sum()) if len(wb) else 0, int(last_day.to_automated.sum()) if len(wb) else 0
     headline = dict(
         human_engagements_last_24h=int(eng),
         to_automated_last_24h=int(to_auto),
         wasted_breath_last_24h=round(float(to_auto / eng), 4) if eng else None,
         one_in=int(round(eng / to_auto)) if to_auto else None,
-        peak_hour=last_day.loc[last_day.wasted_breath.idxmax()].to_dict() if last_day.wasted_breath.notna().any() else None,
+        peak_hour=last_day.loc[last_day.wasted_breath.idxmax()].to_dict() if len(wb) and last_day.wasted_breath.notna().any() else None,
         accounts=dict(total=int(len(scored)), **{k: int(v) for k, v in scored.group.value_counts().items()}),
-        ghost_made_trends=int(trends.ghost_made.sum()), official_trend_slots=int(len(trends)),
+        ghost_made_trends=int(trends.ghost_made.sum()) if len(trends) else 0, official_trend_slots=int(len(trends)),
     )
-    results = dict(generated_at=time.time(), t0=t0, hours=int(wb.hour.max()) + 1 if len(wb) else 0, min_group=MIN_GROUP,
+    hours = int(((ev.ts.max() - t0) // 3600) + 1) if len(ev) else 0
+    if flow is None:
+        flow = dict(topic=topics[0] if topics else "none", published=False, automated_accounts=0, origin={}, audience={}, origin_to_audience=[], direction={}, destinations=[], humans_targeted_by_replies={})
+    results = dict(generated_at=time.time(), t0=t0, hours=hours, min_group=MIN_GROUP,
                    headline=headline, validation=report,
                    wasted_breath=wb.round(4).replace({np.nan: None}).to_dict(orient="records"),
                    trends=trends.round(4).replace({np.nan: None}).to_dict(orient="records"),

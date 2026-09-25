@@ -16,6 +16,9 @@ def wasted_breath(ev: pd.DataFrame, groups: pd.Series, t0: float) -> pd.DataFram
     eng["from_group"] = eng.account.map(groups).fillna("unknown")
     eng["to_group"] = eng.target.map(groups).fillna("unknown")
     eng = eng[eng.from_group == "human"]
+    cols = ["topic", "hour", "human_engagements", "to_automated", "n_humans", "wasted_breath"]
+    if eng.empty or "topic" not in eng:
+        return pd.DataFrame(columns=cols)
     eng["hour"] = ((eng.ts - t0) // 3600).astype(int)
     g = eng.groupby(["topic", "hour"])
     out = g.size().rename("human_engagements").to_frame()
@@ -37,6 +40,8 @@ def real_trending(ev: pd.DataFrame, groups: pd.Series, official: pd.DataFrame, t
             .sort_values(["hour", "posts"], ascending=[True, False]).groupby("hour").head(top))
     real["rank"] = real.groupby("hour").cumcount() + 1
     off = official.rename(columns={"posts": "official_posts", "rank": "official_rank"})
+    if off.empty or posts.empty:
+        return pd.DataFrame(columns=["hour", "topic", "official_posts", "official_rank", "real_rank", "automated_share", "ghost_made", "displaced"])
     merged = off.merge(real[["hour", "topic", "rank"]].rename(columns={"rank": "real_rank"}), on=["hour", "topic"], how="left")
     share = posts.groupby(["hour", "topic"]).group.apply(lambda s: (s == "automated").mean()).rename("automated_share")
     merged = merged.merge(share.reset_index(), on=["hour", "topic"], how="left")

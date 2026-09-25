@@ -17,6 +17,12 @@ FEATURES = ["rhythm_cv", "sleep_gap_h", "regret_rate", "ai_phrase_rate", "posts_
 def train_and_score(feat: pd.DataFrame, labels: pd.Series | None, threshold: float = 0.7, seed: int = 0):
     """Returns (scored features, validation report). If no labels are given, uses a rule-based fallback."""
     f = feat.copy()
+    for c in FEATURES + ["declared_bot", "created_at"]:
+        if c not in f:
+            f[c] = False if c == "declared_bot" else np.nan
+    if f.empty:
+        f["score"] = pd.Series(dtype=float); f["group"] = pd.Series(dtype=object)
+        return f, dict(method="none", note="no accounts with enough posts yet")
     helper = f.declared_bot.fillna(False).astype(bool)
     if labels is None or labels.sum() < 20:
         f["score"] = _rule_score(f)
