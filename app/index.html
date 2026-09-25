@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html><head>
+<title>Roomtone</title>
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/react-dom.production.min.js", "landJson": "assets/land-110m.json", "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "assets/babel.min.js"};</script>
+<script src="rt.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/dba76985.js"></script>
+
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/9a728092.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/ca12ebcc.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/bdc73d32.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/ac8a741a.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/308c61a2.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/02e8ab90.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/3fd2f2aa.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/f3e494f6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/3bbbcb95.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/45a741da.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9923142e.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/dedd3024.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/238172bd.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/f9374a2f.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9bab2bfb.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/c1ef3e50.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9923142e.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/dedd3024.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/238172bd.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/f9374a2f.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9bab2bfb.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/c1ef3e50.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9923142e.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/dedd3024.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/238172bd.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/f9374a2f.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/9bab2bfb.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("assets/c1ef3e50.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/339f58ce.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/4c96fc33.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/0c9acfb4.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/8c609ef8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<script src="assets/a5491a26.js"></script>
+<script src="assets/37ac5847.js"></script>
+<style>
+body{margin:0;background:#eef1f4;color:#10161d;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2a78d6;text-decoration:none}a:hover{color:#10161d;text-decoration:underline}
+button{font-family:inherit}
+*{box-sizing:border-box}
+@keyframes rt-live{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion: reduce){*{transition-duration:0ms !important;animation:none !important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#eef1f4">
+
+<header style="background:#f8f9fb;border-bottom:1px solid rgba(16,22,29,.1);padding:0 clamp(16px,3vw,40px)">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding:14px 0">
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+      <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1">Roomtone</div>
+      <div style="font-size:13px;color:#4d5966;text-wrap:balance;max-width:340px">What a conversation sounds like when nobody real is in it</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;font:500 12px 'IBM Plex Mono',monospace;color:#3b4652;padding:7px 11px;border:1px solid rgba(16,22,29,.14);border-radius:999px;white-space:nowrap">
+        <span style="width:7px;height:7px;border-radius:50%;background:#2f9a5f;animation:rt-live 2.4s ease-in-out infinite"></span>Live · hourly · last run {{ lastRun }}
+      </div>
+      <a href="#feed" style="font-size:13px;font-weight:500;color:#f3f6f9;background:#10161d;padding:8px 14px;border-radius:999px;white-space:nowrap">Open the ghost-free feed</a>
+    </div>
+  </div>
+</header>
+
+<div style="padding:16px clamp(16px,3vw,40px) 0">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px">
+    <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966;white-space:nowrap">Data source</div>
+    <div style="display:flex;flex-wrap:wrap;gap:3px;background:#e1e6eb;border-radius:999px;padding:3px">
+      <sc-for list="{{ srcSeg }}" as="sg" hint-placeholder-count="5">
+        <button sc-camel-on-click="{{ sg.onClick }}" style="cursor:pointer;display:flex;align-items:center;gap:7px;border:none;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:500;background:{{ sg.bg }};color:{{ sg.color }};box-shadow:{{ sg.sh }};transition:background 300ms,color 300ms;white-space:nowrap">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ sg.dot }};border:1px {{ sg.dotStyle }} {{ sg.dotBorder }}"></span>{{ sg.name }}
+        </button>
+      </sc-for>
+    </div>
+    <div style="font-size:13px;color:#4d5966;text-wrap:pretty">{{ srcNote }}</div>
+  </div>
+</div>
+
+<section data-screen-label="Status strip" style="padding:14px clamp(16px,3vw,40px) 24px">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+
+    <div style="flex:1 1 380px;min-width:0;background:#0f1318;color:#e8edf2;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:460px">
+      <div style="padding:22px 24px 0;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9aa6b2;white-space:nowrap">Wasted Breath · 24 h</div>
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;color:#c9d2db;white-space:nowrap">{{ srcShort }}</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <div style="font-family:'Instrument Serif',serif;font-size:clamp(84px,7.4vw,116px);line-height:.9;letter-spacing:-.02em;color:#f3f6f9;white-space:nowrap">1 in {{ oneIn }}</div>
+          <div ref="{{ countRef }}" style="font:500 20px 'IBM Plex Mono',monospace;color:#eb6834;font-variant-numeric:tabular-nums">0.0%</div>
+        </div>
+        <div style="font-size:15.5px;line-height:1.45;color:#dfe5eb;text-wrap:pretty">of the replies and likes real people gave went to automated-looking accounts.</div>
+        <div style="align-self:flex-start;font:500 11.5px 'IBM Plex Mono',monospace;color:#bfe3cc;background:rgba(79,179,122,.12);border:1px solid rgba(79,179,122,.3);padding:5px 9px;border-radius:999px;white-space:nowrap">{{ deltaText }}</div>
+      </div>
+      <div style="position:relative;flex:1;min-height:190px;margin-top:10px">
+        <div ref="{{ heroWrap }}" style="position:absolute;inset:0"><canvas ref="{{ heroRef }}" style="display:block;width:100%;height:100%"></canvas></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 24px;background:rgba(11,15,19,.88);border-top:1px solid rgba(220,230,240,.08);display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:#c3ccd5;pointer-events:none">
+          <div style="display:flex;align-items:center;gap:7px;white-space:nowrap"><span style="width:8px;height:8px;border-radius:50%;background:#5b9ff0;box-shadow:0 0 8px #2a78d6"></span>Real people</div>
+          <div style="display:flex;align-items:center;gap:7px;white-space:nowrap"><span style="width:8px;height:8px;border-radius:50%;border:1.5px solid #eb6834;background:rgba(235,104,52,.3)"></span>Lost to automated-looking</div>
+          <div style="font:400 11px 'IBM Plex Mono',monospace;color:#8793a0;white-space:nowrap">1 figure = 1%</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 380px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4">
+        <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:7px;min-width:0">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#4d5966">{{ t.label }}</div>
+          <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <div style="font-family:'Instrument Serif',serif;font-size:46px;line-height:1">{{ t.value }}</div>
+            <div style="font:500 13px 'IBM Plex Mono',monospace;color:#4d5966;white-space:nowrap">{{ t.unit }}</div>
+          </div>
+          <div style="font-size:12.5px;line-height:1.45;color:#4d5966;text-wrap:pretty">{{ t.sub }}</div>
+          <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:6px;font:400 10.5px/1.4 'IBM Plex Mono',monospace;color:#4d5966;padding-top:8px;margin-top:auto;border-top:1px solid rgba(16,22,29,.08)"><span style="color:#2a78d6">✓</span><span>{{ t.check }}</span></div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1 1 340px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:20px 22px 12px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+        <div style="font-family:'Instrument Serif',serif;font-size:26px;line-height:1.05">What changed in the last 24 hours</div>
+        <div style="font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#4d5966;border:1px solid rgba(16,22,29,.14);padding:4px 7px;border-radius:5px;white-space:nowrap">By rules, not AI</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));column-gap:24px">
+        <sc-for list="{{ changes }}" as="c" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding:8px 0;border-top:1px solid rgba(16,22,29,.07)">
+            <div style="font:500 10.5px 'IBM Plex Mono',monospace;color:#7a8692;padding-top:2px">{{ c.n }}</div>
+            <div style="font-size:13.5px;line-height:1.42;color:#10161d;text-wrap:pretty">{{ c.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav style="position:sticky;top:0;z-index:20;background:rgba(238,241,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid rgba(16,22,29,.1);border-top:1px solid rgba(16,22,29,.1);padding:0 clamp(16px,3vw,40px)">
+  <div style="max-width:1440px;margin:0 auto;display:flex;gap:4px;overflow-x:auto">
+    <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="5">
+      <button sc-camel-on-click="{{ tb.onClick }}" style="flex:none;display:flex;align-items:baseline;gap:10px;background:none;border:none;cursor:pointer;padding:16px 16px 14px;border-bottom:2px solid {{ tb.line }};color:{{ tb.color }};transition:color 300ms,border-color 300ms">
+        <span style="font:500 11px 'IBM Plex Mono',monospace">{{ tb.num }}</span>
+        <span style="font-size:15px;font-weight:500;white-space:nowrap">{{ tb.q }}</span>
+      </button>
+    </sc-for>
+  </div>
+</nav>
+
+<main style="padding:28px clamp(16px,3vw,40px) 64px">
+<div style="max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+
+<sc-if value="{{ isT4 }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="All datasets" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:6px;max-width:720px">
+        <div style="font-family:'Instrument Serif',serif;font-size:36px;line-height:1.05">All datasets</div>
+        <div style="font-size:14px;color:#4d5966;line-height:1.55;text-wrap:pretty">Every source goes through the same privacy gate, the same score and the same checks. Pick one to filter the whole page, or keep all sources combined, weighted by human engagements.</div>
+      </div>
+      <button sc-camel-on-click="{{ showAll }}" style="cursor:pointer;font-size:13px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid {{ allBtn.border }};background:{{ allBtn.bg }};color:{{ allBtn.color }};white-space:nowrap">{{ allBtn.label }}</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      <sc-for list="{{ dsCards }}" as="d" hint-placeholder-count="4">
+        <div style="background:{{ d.bg }};border:1px solid {{ d.border }};box-shadow:{{ d.ring }};border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 300ms">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <div style="font-size:18px;font-weight:600">{{ d.name }}</div>
+            <div style="font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;border:1px solid {{ d.stBorder }};background:{{ d.stBg }};color:{{ d.stColor }};white-space:nowrap">{{ d.status }}</div>
+          </div>
+          <div style="font-size:13px;color:#4d5966;line-height:1.45;min-height:38px">{{ d.method }}</div>
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <div style="font-family:'Instrument Serif',serif;font-size:46px;line-height:1;white-space:nowrap;flex:none">1 in {{ d.oneIn }}</div>
+            <div style="font-size:12.5px;color:#4d5966;line-height:1.3">attention lost<br>last 24 h · {{ d.wb }}</div>
+          </div>
+          <svg sc-camel-view-box="0 0 300 60" sc-camel-preserve-aspect-ratio="none" style="width:100%;height:56px;display:block">
+            <line x1="0" x2="300" y1="58" y2="58" style="stroke:rgba(16,22,29,.12)"></line>
+            <path d="{{ d.spark }}" style="fill:none;stroke:#eb6834;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linejoin:round"></path>
+          </svg>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;padding-top:10px;border-top:1px solid rgba(16,22,29,.08)">
+            <sc-for list="{{ d.facts }}" as="fa" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                <div style="font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#4d5966">{{ fa.k }}</div>
+                <div style="font:500 13px 'IBM Plex Mono',monospace;color:#10161d">{{ fa.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-size:12px;color:#4d5966;line-height:1.45">Collects {{ d.collected }}</div>
+          <button sc-camel-on-click="{{ d.onClick }}" style="cursor:pointer;margin-top:auto;font-size:13px;font-weight:500;padding:9px 12px;border-radius:8px;border:1px solid {{ d.btnBorder }};background:{{ d.btnBg }};color:{{ d.btnColor }}">{{ d.btn }}</button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+      <div style="flex:1.2 1 520px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Instrument Serif',serif;font-size:30px;line-height:1.05">Attention lost, by source and topic</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">Average hourly share of human replies and likes that went to automated-looking accounts, {{ H }} hours. Tap a row to filter.</div>
+        </div>
+        <div style="overflow-x:auto">
+          <div style="display:grid;grid-template-columns:130px repeat(5,minmax(76px,1fr));gap:6px;min-width:560px">
+            <div></div>
+            <sc-for list="{{ topicsAll }}" as="th" hint-placeholder-count="5"><div style="font:500 11.5px 'IBM Plex Mono',monospace;color:#4d5966;padding:0 4px 4px">#{{ th }}</div></sc-for>
+            <sc-for list="{{ heat }}" as="hr" hint-placeholder-count="5">
+              <button sc-camel-on-click="{{ hr.onClick }}" style="cursor:pointer;text-align:left;background:none;border:none;padding:0;font-size:13.5px;font-weight:{{ hr.weight }};color:#10161d;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:{{ hr.dot }}"></span>{{ hr.name }}</button>
+              <sc-for list="{{ hr.cells }}" as="hc" hint-placeholder-count="5">
+                <div style="border-radius:8px;padding:12px 10px;font:500 14px 'IBM Plex Mono',monospace;background:{{ hc.bg }};color:#10161d;box-shadow:{{ hc.ring }}">{{ hc.v }}</div>
+              </sc-for>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1 1 420px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:'Instrument Serif',serif;font-size:30px;line-height:1.05">Checks per source</div>
+        <div style="font-size:14px;color:#4d5966;line-height:1.5">Each source is validated on its own held-out accounts.</div>
+        <div style="overflow-x:auto">
+          <div style="display:grid;grid-template-columns:minmax(110px,1.4fr) repeat(4,minmax(64px,1fr));min-width:440px">
+            <sc-for list="{{ checkHead }}" as="ch" hint-placeholder-count="5"><div style="font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#4d5966;padding:0 6px 8px 0">{{ ch }}</div></sc-for>
+            <sc-for list="{{ checkRows }}" as="cr" hint-placeholder-count="4">
+              <sc-for list="{{ cr }}" as="cv" hint-placeholder-count="5"><div style="padding:11px 6px 11px 0;border-top:1px solid rgba(16,22,29,.08);font:500 13px 'IBM Plex Mono',monospace;color:#10161d">{{ cv }}</div></sc-for>
+            </sc-for>
+          </div>
+        </div>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966;margin-top:auto"><span style="color:#eb6834">!</span><span>Every source runs through the same collector, privacy gate and score. A source marked Practice is a simulated stream; Live means collected from the platform.</span></div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isT0 }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Tab 1 · Attention lost" style="display:flex;flex-direction:column;gap:16px">
+    <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:14px">
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:640px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">How much attention is lost, hour by hour</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">Share of human replies and likes that landed on automated-looking accounts, per topic, over {{ H }} hours. Pick a topic to bring it forward.</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <sc-for list="{{ topicChips }}" as="tc" hint-placeholder-count="5">
+            <button sc-camel-on-click="{{ tc.onClick }}" style="cursor:pointer;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:7px 12px;border-radius:999px;border:1px solid {{ tc.border }};background:{{ tc.bg }};color:{{ tc.color }};transition:background 300ms,color 300ms">
+              <span style="width:8px;height:8px;border-radius:50%;background:{{ tc.dot }}"></span>#{{ tc.name }}
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position:relative">
+        <svg ref="{{ chartRef }}" sc-camel-view-box="0 0 1000 300" sc-camel-on-mouse-move="{{ onChartMove }}" sc-camel-on-mouse-leave="{{ onChartLeave }}" style="width:100%;height:auto;display:block;overflow:visible;cursor:crosshair">
+          <defs>
+            <pattern id="rt-hatch" width="6" height="6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.4" height="6" style="fill:#c9d0d8"></rect></pattern>
+          </defs>
+          <sc-for list="{{ gaps }}" as="g" hint-placeholder-count="0">
+            <rect x="{{ g.x }}" y="14" width="{{ g.w }}" height="252" style="fill:url(#rt-hatch);opacity:.55"></rect>
+          </sc-for>
+          <g style="transform-box:fill-box;transform-origin:50% 100%;transform:scaleY({{ tideScale }});transition:transform 1400ms cubic-bezier(.2,.7,.2,1)">
+            <rect x="{{ band.x }}" y="14" width="{{ band.w }}" height="252" style="fill:rgba(235,104,52,.11)"></rect>
+            <rect x="{{ band.x }}" y="14" width="{{ band.w }}" height="1.5" style="fill:#eb6834"></rect>
+          </g>
+          <sc-for list="{{ yTicks }}" as="yt" hint-placeholder-count="0">
+            <line x1="44" x2="984" y1="{{ yt.y }}" y2="{{ yt.y }}" style="stroke:rgba(16,22,29,.08);stroke-width:1"></line>
+            <text x="36" y="{{ yt.ty }}" style="font:400 11px 'IBM Plex Mono',monospace;fill:#4d5966;text-anchor:end">{{ yt.label }}</text>
+          </sc-for>
+          <sc-for list="{{ xTicks }}" as="xt" hint-placeholder-count="0">
+            <line x1="{{ xt.x }}" x2="{{ xt.x }}" y1="266" y2="272" style="stroke:rgba(16,22,29,.25)"></line>
+            <text x="{{ xt.x }}" y="288" style="font:400 11px 'IBM Plex Mono',monospace;fill:#4d5966;text-anchor:middle">{{ xt.label }}</text>
+          </sc-for>
+          <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="0">
+            <path d="{{ ln.d }}" style="fill:none;stroke:{{ ln.stroke }};stroke-width:{{ ln.w }};stroke-linecap:round;stroke-linejoin:round;transition:stroke 300ms"></path>
+          </sc-for>
+          <text x="{{ band.lx }}" y="30" style="font:500 11px 'IBM Plex Sans',sans-serif;fill:#b8461b;opacity:{{ tideScale }};transition:opacity 600ms 900ms">{{ band.label }}</text>
+          <sc-if value="{{ hover.on }}" hint-placeholder-val="{{ false }}">
+            <line x1="{{ hover.x }}" x2="{{ hover.x }}" y1="14" y2="266" style="stroke:#10161d;stroke-width:1;stroke-dasharray:2 3"></line>
+            <sc-if value="{{ hover.has }}" hint-placeholder-val="{{ false }}">
+              <circle cx="{{ hover.x }}" cy="{{ hover.y }}" r="4.5" style="fill:#eb6834;stroke:#f8f9fb;stroke-width:2"></circle>
+            </sc-if>
+          </sc-if>
+        </svg>
+        <sc-if value="{{ hover.on }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:6px;left:{{ hover.left }};transform:translateX({{ hover.shift }});pointer-events:none;background:#10161d;color:#f3f6f9;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;white-space:nowrap">
+            <div style="font:400 11px 'IBM Plex Mono',monospace;color:#9aa6b2">{{ hover.when }} · #{{ topic }}</div>
+            <div style="font:500 14px 'IBM Plex Mono',monospace">{{ hover.val }}</div>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12.5px;color:#4d5966">
+          <div><strong style="font-weight:600;color:#10161d">Ghost-made trend slots per hour</strong> · {{ ghostTotal }} across {{ H }} hours</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px">same time axis as above</div>
+        </div>
+        <svg sc-camel-view-box="0 0 1000 34" style="width:100%;height:auto;display:block">
+          <sc-for list="{{ ghostBars }}" as="gb" hint-placeholder-count="0">
+            <rect x="{{ gb.x }}" y="{{ gb.y }}" width="{{ gb.w }}" height="{{ gb.h }}" rx="1.5" style="fill:{{ gb.fill }}"></rect>
+          </sc-for>
+        </svg>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(16,22,29,.08);font-size:12.5px;color:#4d5966">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#eb6834;border-radius:2px"></span>Selected topic</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#b9c1ca;border-radius:2px"></span>Other topics</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:12px;background:rgba(235,104,52,.14);border-top:1.5px solid #eb6834"></span>Detected campaign push</div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:12px;background:repeating-linear-gradient(45deg,#c9d0d8 0 1.4px,transparent 1.4px 4px)"></span>Under 50 people · never published</div>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px 'IBM Plex Mono',monospace;margin-left:auto"><span style="color:#2a78d6">✓</span>Scored at threshold {{ threshold }} · precision {{ precision }} on held-out accounts</div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div data-screen-label="Sub-topics" style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:680px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Inside #{{ topic }}</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">Sub-topics of the selected topic, with the share of human attention each one lost. Pick one to see what its automated-looking posts look like.</div>
+        </div>
+        <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#b8461b;border:1px solid rgba(235,104,52,.45);padding:5px 8px;border-radius:6px;white-space:nowrap">Prototype split · not in results.json yet</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) 124px 76px;gap:12px;padding:0 12px 4px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#4d5966">
+            <div>Sub-topic · share of posts</div><div>Lost to automated</div><div style="text-align:right">People</div>
+          </div>
+          <sc-for list="{{ subRows }}" as="sr" hint-placeholder-count="5">
+            <button sc-camel-on-click="{{ sr.onClick }}" style="display:grid;grid-template-columns:minmax(0,1fr) 124px 76px;gap:12px;align-items:center;padding:12px;border-radius:10px;border:1px {{ sr.bstyle }} {{ sr.border }};background:{{ sr.bg }};text-align:left;cursor:pointer;color:#10161d;transition:background 300ms,border-color 300ms">
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="font-size:14.5px;font-weight:500">{{ sr.name }}</div>
+                <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:6px;background:rgba(16,22,29,.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ sr.postsW }};background:#9aa5b0;border-radius:3px"></div></div><span style="font:400 11px 'IBM Plex Mono',monospace;color:#4d5966;white-space:nowrap">{{ sr.posts }}</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="font:500 16px 'IBM Plex Mono',monospace;color:{{ sr.wbColor }}">{{ sr.wb }}</div>
+                <div style="height:4px;background:rgba(16,22,29,.06);border-radius:2px;overflow:hidden"><div style="height:100%;width:{{ sr.wbW }};background:#eb6834"></div></div>
+                <div style="font-size:11.5px;color:#4d5966;white-space:nowrap">{{ sr.oneIn }}</div>
+              </div>
+              <div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#4d5966;text-align:right">{{ sr.ppl }}</div>
+            </button>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:2px;flex-shrink:0">
+            <div style="font-size:15px;font-weight:600">Automated-looking posts · {{ subName }}</div>
+            <div style="font:400 11px 'IBM Plex Mono',monospace;color:#4d5966">names and avatars hidden · stock phrases marked</div>
+          </div>
+          <sc-if value="{{ subHasPosts }}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{ subPosts }}" as="p" hint-placeholder-count="2">
+              <div style="background:#fff;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div title="Avatar hidden" style="flex:none;width:42px;height:42px;border-radius:50%;background:repeating-linear-gradient(45deg,#10161d 0 4px,#2b3540 4px 8px)"></div>
+                  <div title="Name hidden" style="flex:1;display:flex;flex-direction:column;gap:7px">
+                    <div style="width:{{ p.nameW }};height:11px;background:#10161d;border-radius:2px"></div>
+                    <div style="width:{{ p.handleW }};height:9px;background:#c3cad2;border-radius:2px"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+                    <div style="font:400 11px 'IBM Plex Mono',monospace;color:#4d5966;white-space:nowrap">{{ p.when }}</div>
+                    <div style="font:500 10px 'IBM Plex Mono',monospace;color:#4d5966;border:1px solid rgba(16,22,29,.14);padding:1px 5px;border-radius:4px">{{ p.lang }}</div>
+                  </div>
+                </div>
+                <div style="font-size:15.5px;line-height:1.55;color:#10161d;text-wrap:pretty"><sc-for list="{{ p.segs }}" as="sg" hint-placeholder-count="1"><span style="background:{{ sg.bg }};box-shadow:{{ sg.sh }};border-radius:3px">{{ sg.t }}</span></sc-for></div>
+                <sc-if value="{{ p.hasTr }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:13px;line-height:1.5;color:#4d5966;font-style:italic">Translation: {{ p.tr }}</div>
+                </sc-if>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ p.signals }}" as="sgn" hint-placeholder-count="2">
+                    <span style="flex:none;white-space:nowrap;font:500 10.5px 'IBM Plex Mono',monospace;color:#3b4652;background:#eef1f4;padding:3px 7px;border-radius:4px">{{ sgn }}</span>
+                  </sc-for>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:center;padding-top:10px;border-top:1px solid rgba(16,22,29,.08)">
+                  <div style="display:flex;align-items:center;gap:8px;font:400 11.5px 'IBM Plex Mono',monospace;color:#4d5966">score<div style="width:70px;height:5px;background:rgba(16,22,29,.08);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ p.scoreW }};background:#eb6834"></div></div><span style="color:#10161d">{{ p.score }}</span></div>
+                  <div style="font:500 11.5px 'IBM Plex Mono',monospace;color:#b8461b;white-space:nowrap">{{ p.eng }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ subBlank }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px dashed #b9c1ca;border-radius:12px;padding:28px 20px;display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <div style="font-size:15px;font-weight:500">Not published</div>
+              <div style="font-size:13.5px;color:#4d5966;line-height:1.5">Fewer than 50 people took part in this sub-topic, so no share and no example posts are shown.</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966"><span style="color:#2a78d6">✓</span><span>Examples shown only from accounts scoring above {{ threshold }}. Identity is never stored, so it can't be shown.</span></div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-wrap:wrap;gap:24px">
+      <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:10px;max-width:420px">
+        <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">What's really trending</div>
+        <div style="font-size:14px;color:#4d5966;line-height:1.55;text-wrap:pretty">The platform's top three next to the top three once automated-looking accounts are removed, at {{ trendWhen }}, the hour the two lists disagree most.</div>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966;margin-top:4px"><span style="color:#2a78d6">✓</span><span>Ghost-made = most posts in the slot came from automated-looking accounts. Slots with fewer than 50 people stay blank.</span></div>
+        </sc-if>
+      </div>
+      <div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">Official top three</div>
+          <sc-for list="{{ official }}" as="o" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:10px;padding:14px 14px;border:1px solid {{ o.border }};background:{{ o.bg }};border-radius:10px">
+              <div style="font-family:'Instrument Serif',serif;font-size:26px;line-height:1;color:#4d5966">{{ o.rank }}</div>
+              <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                <div style="font-size:15px;font-weight:500">{{ o.name }}</div>
+                <div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#4d5966">{{ o.sub }}</div>
+              </div>
+              <sc-if value="{{ o.ghost }}" hint-placeholder-val="{{ false }}">
+                <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#10161d;background:#eb6834;padding:4px 7px;border-radius:5px">Ghost-made</div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#1d5aa6">Top three · ghosts removed</div>
+          <sc-for list="{{ realList }}" as="rl" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:14px;border:1px {{ rl.bstyle }} {{ rl.border }};background:{{ rl.bg }};border-radius:10px;min-height:62px">
+              <div style="font-family:'Instrument Serif',serif;font-size:26px;line-height:1;color:#1d5aa6">{{ rl.rank }}</div>
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <div style="font-size:15px;font-weight:500;color:{{ rl.color }}">{{ rl.name }}</div>
+                <div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#4d5966">{{ rl.sub }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isT1 }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Tab 2 · Who steers whom" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <sc-for list="{{ langTiles }}" as="lt" hint-placeholder-count="4">
+        <button sc-camel-on-click="{{ lt.onClick }}" style="cursor:pointer;text-align:left;background:{{ lt.bg }};border:1px solid {{ lt.border }};border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;color:#10161d;transition:background 300ms,border-color 300ms">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">{{ lt.name }} audience</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1">{{ lt.big }}</div>
+          <div style="font-size:13px;color:#4d5966;line-height:1.4">{{ lt.sub }}</div>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+      <div style="flex:1 1 520px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Who steers whom</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">Audience = the language an account writes in. Each cell: share of posts from automated-looking accounts, and the verdict of the mood test. Tap a cell to open its mood lines.</div>
+        </div>
+        <div style="overflow-x:auto">
+          <div style="display:grid;grid-template-columns:92px repeat(5,minmax(84px,1fr));gap:6px;min-width:540px">
+            <div></div>
+            <sc-for list="{{ topicsHead }}" as="th" hint-placeholder-count="5">
+              <div style="font:500 11.5px 'IBM Plex Mono',monospace;color:#4d5966;padding:0 4px 4px">#{{ th }}</div>
+            </sc-for>
+            <sc-for list="{{ grid }}" as="row" hint-placeholder-count="4">
+              <button sc-camel-on-click="{{ row.onClick }}" style="cursor:pointer;text-align:left;background:none;border:none;padding:0 6px 0 0;font-size:14px;font-weight:{{ row.weight }};color:#10161d;display:flex;align-items:center;gap:6px">
+                <span style="width:6px;height:6px;border-radius:50%;background:{{ row.dot }}"></span>{{ row.name }}
+              </button>
+              <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="5">
+                <button sc-camel-on-click="{{ cell.onClick }}" style="cursor:pointer;text-align:left;border:1px {{ cell.bstyle }} {{ cell.border }};background:{{ cell.bg }};box-shadow:{{ cell.ring }};border-radius:8px;padding:10px 10px 9px;display:flex;flex-direction:column;gap:7px;min-height:74px;color:#10161d;transition:box-shadow 300ms">
+                  <div style="font:500 17px 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:{{ cell.numColor }}">{{ cell.share }}</div>
+                  <div style="align-self:flex-start;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;padding:3px 6px;border-radius:4px;border:1px {{ cell.cstyle }} {{ cell.cborder }};background:{{ cell.cbg }};color:{{ cell.ccolor }};white-space:nowrap">{{ cell.verdict }}</div>
+                </button>
+              </sc-for>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 16px;padding-top:12px;border-top:1px solid rgba(16,22,29,.08)">
+          <sc-for list="{{ verdictKey }}" as="vk" hint-placeholder-count="5">
+            <div style="display:flex;gap:8px;align-items:baseline;font-size:12.5px;color:#4d5966;line-height:1.4">
+              <span style="flex:none;font:500 10px 'IBM Plex Mono',monospace;text-transform:uppercase;padding:2px 5px;border-radius:4px;border:1px {{ vk.cstyle }} {{ vk.cborder }};background:{{ vk.cbg }};color:{{ vk.ccolor }}">{{ vk.name }}</span><span>{{ vk.desc }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1.25 1 560px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">Mood test · {{ moodTitle }}</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Who turned first?</div>
+          </div>
+          <button sc-camel-on-click="{{ toggleSound }}" style="cursor:pointer;display:flex;align-items:center;gap:8px;font:500 12px 'IBM Plex Mono',monospace;color:#10161d;background:#fff;border:1px solid rgba(16,22,29,.14);padding:7px 11px;border-radius:999px">
+            <span style="width:8px;height:8px;border-radius:50%;background:{{ soundDot }}"></span>{{ soundLabel }}
+          </button>
+        </div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:#4d5966">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#2a78d6;border-radius:2px"></span>Real people · mood, 3-hour average</div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#eb6834;border-radius:2px"></span>Automated-looking · mood, 3-hour average</div>
+        </div>
+        <svg sc-camel-view-box="0 0 1000 300" style="width:100%;height:auto;display:block;overflow:visible">
+          <defs><clipPath id="rt-mclip"><rect x="0" y="0" height="300" style="width:{{ drawW }};transition:{{ drawTrans }}"></rect></clipPath></defs>
+          <sc-for list="{{ moodTicks }}" as="mt" hint-placeholder-count="0">
+            <line x1="44" x2="984" y1="{{ mt.y }}" y2="{{ mt.y }}" style="stroke:{{ mt.stroke }};stroke-width:1"></line>
+            <text x="36" y="{{ mt.ty }}" style="font:400 11px 'IBM Plex Mono',monospace;fill:#4d5966;text-anchor:end">{{ mt.label }}</text>
+          </sc-for>
+          <sc-for list="{{ xTicks }}" as="xt" hint-placeholder-count="0">
+            <text x="{{ xt.x }}" y="292" style="font:400 11px 'IBM Plex Mono',monospace;fill:#4d5966;text-anchor:middle">{{ xt.label }}</text>
+          </sc-for>
+          <g style="clip-path:url(#rt-mclip)">
+            <path d="{{ mood.hd }}" style="fill:none;stroke:#2a78d6;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round"></path>
+            <path d="{{ mood.bd }}" style="fill:none;stroke:#eb6834;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round"></path>
+          </g>
+          <sc-for list="{{ mood.markers }}" as="mk" hint-placeholder-count="0">
+            <g style="opacity:{{ markerOp }};transform:translateY({{ markerY }});transition:opacity 300ms,transform 300ms cubic-bezier(.3,1.6,.5,1)">
+              <line x1="{{ mk.x }}" x2="{{ mk.x }}" y1="{{ mk.y0 }}" y2="264" style="stroke:{{ mk.color }};stroke-width:1.5;stroke-dasharray:5 4"></line>
+              <rect x="{{ mk.bx }}" y="{{ mk.by }}" width="{{ mk.bw }}" height="22" rx="5" style="fill:{{ mk.color }}"></rect>
+              <text x="{{ mk.tx }}" y="{{ mk.ty }}" style="font:500 11.5px 'IBM Plex Mono',monospace;fill:{{ mk.tcolor }};text-anchor:{{ mk.anchor }}">{{ mk.label }}</text>
+            </g>
+          </sc-for>
+        </svg>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#fff;border:1px solid rgba(16,22,29,.1);border-radius:10px">
+          <span style="flex:none;font:500 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;padding:3px 7px;border-radius:4px;border:1px {{ moodChip.cstyle }} {{ moodChip.cborder }};background:{{ moodChip.cbg }};color:{{ moodChip.ccolor }};margin-top:2px">{{ moodChip.name }}</span>
+          <div style="font-size:15px;line-height:1.5;text-wrap:pretty">{{ moodWhy }}</div>
+        </div>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966"><span style="color:#2a78d6">✓</span><span>A turn = moves more than 0.3 from its opening level and stays for 4 h. "Came before" is timing, not proof of cause. {{ moodCheck }}</span></div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isT2 }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Tab 3 · Where from, where to" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+      <div style="flex:1.7 1 640px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-wrap:wrap;gap:24px">
+        <div style="flex:1.2 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Where they sleep</div>
+            <div style="font-size:14px;color:#4d5966;line-height:1.5">Estimated from each account's quiet hours. Hover a region to find it on the globe.</div>
+          </div>
+          <div style="display:flex;gap:4px;background:#e6eaee;border-radius:999px;padding:3px;align-self:flex-start">
+            <sc-for list="{{ langSeg }}" as="ls" hint-placeholder-count="4">
+              <button sc-camel-on-click="{{ ls.onClick }}" style="cursor:pointer;border:none;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;background:{{ ls.bg }};color:{{ ls.color }};transition:background 300ms">{{ ls.name }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <sc-for list="{{ sleepRows }}" as="sr" hint-placeholder-count="6">
+              <div sc-camel-on-mouse-enter="{{ sr.enter }}" sc-camel-on-mouse-leave="{{ sr.leave }}" style="display:grid;grid-template-columns:minmax(120px,160px) minmax(0,1fr);gap:12px;align-items:center;padding:8px 8px;border-radius:8px;background:{{ sr.bg }};cursor:default;transition:background 300ms">
+                <div style="font-size:13.5px;font-weight:500">{{ sr.name }}</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:9px;background:rgba(16,22,29,.05);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ sr.hW }};background:#2a78d6;border-radius:3px;transition:width 500ms"></div></div><div style="width:44px;font:400 11.5px 'IBM Plex Mono',monospace;color:#1d5aa6;text-align:right">{{ sr.hL }}</div></div>
+                  <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:9px;background:rgba(16,22,29,.05);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ sr.aW }};background:#eb6834;border-radius:3px;transition:width 500ms"></div></div><div style="width:44px;font:400 11.5px 'IBM Plex Mono',monospace;color:#b8461b;text-align:right">{{ sr.aL }}</div></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:#4d5966">
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:9px;background:#2a78d6;border-radius:2px"></span>Real people ({{ sleepN.h }})</div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:9px;background:#eb6834;border-radius:2px"></span>Automated-looking ({{ sleepN.a }})</div>
+          </div>
+        </div>
+        <div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:10px">
+          <div style="position:relative;background:#0f1318;border-radius:12px;aspect-ratio:1/1;overflow:hidden">
+            <canvas ref="{{ globeRef }}" sc-camel-on-pointer-down="{{ gDown }}" sc-camel-on-pointer-move="{{ gMove }}" sc-camel-on-pointer-up="{{ gUp }}" sc-camel-on-pointer-cancel="{{ gUp }}" style="display:block;width:100%;height:100%;cursor:grab;touch-action:none"></canvas>
+            <div style="position:absolute;left:14px;top:12px;right:14px;display:flex;flex-direction:column;gap:3px;pointer-events:none">
+              <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#9aa6b2">{{ globe.title }}</div>
+              <div style="font-size:13px;color:#e2e8ee">{{ globe.line }}</div>
+            </div>
+            <div style="position:absolute;left:14px;bottom:12px;right:14px;font:400 10.5px 'IBM Plex Mono',monospace;color:#8793a0;pointer-events:none">Drag to turn · shaded side = night right now</div>
+          </div>
+          <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966"><span style="color:#2a78d6">✓</span><span>Right to within 2 hours for {{ tzAcc }} of {{ tzN }} checked accounts. Tells continents apart, not neighbouring countries.</span></div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="flex:1 1 340px;min-width:0;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Links pushed during the campaign</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">Times each website was linked in #election posts.</div>
+        </div>
+        <sc-for list="{{ links }}" as="lk" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid rgba(16,22,29,.08)">
+            <div style="font:500 13px 'IBM Plex Mono',monospace">{{ lk.domain }}</div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:12px;background:rgba(16,22,29,.05);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ lk.bW }};background:#eb6834;border-radius:3px"></div></div><div style="width:84px;font:400 11.5px 'IBM Plex Mono',monospace;color:#b8461b;text-align:right">{{ lk.bot }} automated</div></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:12px;background:rgba(16,22,29,.05);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ lk.hW }};min-width:3px;background:#2a78d6;border-radius:3px"></div></div><div style="width:84px;font:400 11.5px 'IBM Plex Mono',monospace;color:#1d5aa6;text-align:right">{{ lk.human }} people</div></div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966;margin-top:auto"><span style="color:#2a78d6">✓</span><span>Domains are sites, not people. Ratio automated : people ≥ 70 : 1 on all three.</span></div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:680px">
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">The campaign, end to end</div>
+          <div style="font-size:14px;color:#4d5966;line-height:1.5">{{ flowN }} automated-looking accounts in #election: where they sleep, which audience they write to and which way they push it, and how many real people they replied to. Counts only, never names.</div>
+        </div>
+        <div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#4d5966">each dot ≈ 5 accounts in motion</div>
+      </div>
+      <div style="overflow-x:auto">
+        <div style="position:relative;min-width:760px;aspect-ratio:1000/430">
+          <svg sc-camel-view-box="0 0 1000 430" style="position:absolute;inset:0;width:100%;height:100%;display:block">
+            <text x="{{ flow.X0e }}" y="20" style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;fill:#4d5966;text-anchor:end">WHERE THEY SLEEP</text>
+            <text x="{{ flow.X1 }}" y="20" style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;fill:#4d5966">AUDIENCE · DIRECTION PUSHED</text>
+            <text x="{{ flow.X2 }}" y="20" style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;fill:#4d5966">REAL PEOPLE REPLIED TO</text>
+            <sc-for list="{{ flow.r1 }}" as="r" hint-placeholder-count="0"><path d="{{ r.d }}" style="fill:rgba(235,104,52,.2)"></path></sc-for>
+            <sc-for list="{{ flow.r2 }}" as="r" hint-placeholder-count="0"><path d="{{ r.d }}" style="fill:rgba(42,120,214,.14)"></path></sc-for>
+            <sc-for list="{{ flow.origins }}" as="o" hint-placeholder-count="0">
+              <rect x="{{ flow.X0 }}" y="{{ o.y0 }}" width="12" height="{{ o.h }}" rx="2" style="fill:#eb6834"></rect>
+              <text x="{{ o.lx }}" y="{{ o.ly }}" style="font:500 12.5px 'IBM Plex Sans',sans-serif;fill:#10161d;text-anchor:end">{{ o.name }} <tspan style="font:400 11.5px 'IBM Plex Mono',monospace;fill:#4d5966">{{ o.n }}</tspan></text>
+            </sc-for>
+            <sc-for list="{{ flow.auds }}" as="a" hint-placeholder-count="0">
+              <rect x="{{ flow.X1 }}" y="{{ a.y0 }}" width="12" height="{{ a.h }}" rx="2" style="fill:#eb6834"></rect>
+              <text x="{{ a.lx }}" y="{{ a.ly }}" style="font:500 13px 'IBM Plex Sans',sans-serif;fill:#10161d;paint-order:stroke;stroke:#f8f9fb;stroke-width:5px;stroke-linejoin:round">{{ a.name }} · {{ a.n }}</text>
+              <text x="{{ a.lx }}" y="{{ a.ly2 }}" style="font:500 11.5px 'IBM Plex Mono',monospace;fill:#b8461b;paint-order:stroke;stroke:#f8f9fb;stroke-width:5px;stroke-linejoin:round">{{ a.dirText }}</text>
+            </sc-for>
+            <sc-for list="{{ flow.auds }}" as="a" hint-placeholder-count="0">
+              <rect x="{{ flow.X2 }}" y="{{ a.py0 }}" width="12" height="{{ a.ph }}" rx="2" style="fill:#2a78d6"></rect>
+              <text x="{{ a.plx }}" y="{{ a.ply }}" style="font:500 13px 'IBM Plex Mono',monospace;fill:#10161d">{{ a.people }}</text>
+              <text x="{{ a.plx }}" y="{{ a.ply2 }}" style="font:400 12px 'IBM Plex Sans',sans-serif;fill:#4d5966">people · {{ a.name }}</text>
+            </sc-for>
+          </svg>
+          <canvas ref="{{ flowRef }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+        </div>
+      </div>
+      <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966"><span style="color:#2a78d6">✓</span><span>Direction = average mood of automated-looking posts to that audience (−1 to +1). Regions published only as continents; "not estimated" means too few quiet hours to tell.</span></div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isT3 }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Tab 4 · Can we trust it" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;align-items:stretch">
+      <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">How we checked</div>
+        <div style="font-size:14px;color:#4d5966;line-height:1.5">Scored accounts held out from training, {{ method }}, threshold {{ threshold }}.</div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ valRows }}" as="vr" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid rgba(16,22,29,.08)">
+              <div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:14px;font-weight:500">{{ vr.k }}</div><div style="font-size:12px;color:#4d5966">{{ vr.d }}</div></div>
+              <div style="font:500 20px 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums">{{ vr.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">What gave the ghosts away</div>
+        <div style="font-size:14px;color:#4d5966;line-height:1.5">Share of the score each habit carried.</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ imp }}" as="im" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;justify-content:space-between;gap:10px;font-size:13.5px"><span style="font-weight:500">{{ im.name }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#4d5966">{{ im.v }}</span></div>
+              <div style="height:8px;background:rgba(16,22,29,.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ im.w }};min-width:2px;background:#10161d;border-radius:3px"></div></div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showChecks }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:7px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:#4d5966;margin-top:auto"><span style="color:#eb6834">!</span><span>One habit carries most of the score on practice data. Expect a more even spread on the live stream.</span></div>
+        </sc-if>
+      </div>
+      <div style="perspective:1400px;min-height:400px">
+        <div sc-camel-on-click="{{ flip }}" style="position:relative;width:100%;height:100%;min-height:400px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.3,.7,.2,1);transform:rotateY({{ flipDeg }});cursor:pointer">
+          <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#0f1318;color:#e8edf2;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#9aa6b2">Ghost forecast · next 24 hours</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:44px;line-height:1">{{ fcHead }}</div>
+            <div style="font-size:14.5px;line-height:1.55;color:#c3ccd5;text-wrap:pretty">{{ fcBody }}</div>
+            <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:14px;border-top:1px solid rgba(220,230,240,.1)">
+              <div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#9aa6b2">Publishes only above +10% skill</div>
+              <div style="font:500 12px 'IBM Plex Mono',monospace;color:#0f1318;background:#e8edf2;padding:6px 10px;border-radius:999px">See the grade ↻</div>
+            </div>
+          </div>
+          <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">The grade · skill vs "tomorrow looks like today"</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ grades }}" as="gr" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:78px minmax(0,1fr) 62px;gap:10px;align-items:center">
+                  <div style="font:500 12px 'IBM Plex Mono',monospace">#{{ gr.topic }}</div>
+                  <div style="position:relative;height:14px;background:rgba(16,22,29,.04);border-radius:3px">
+                    <div style="position:absolute;top:-3px;bottom:-3px;left:50%;width:1px;background:rgba(16,22,29,.35)"></div>
+                    <div style="position:absolute;top:-3px;bottom:-3px;left:70%;width:0;border-left:1.5px dashed #2a78d6"></div>
+                    <div style="position:absolute;top:2px;bottom:2px;left:{{ gr.left }};width:{{ gr.width }};background:#4d5966;border-radius:2px"></div>
+                  </div>
+                  <div style="font:500 12px 'IBM Plex Mono',monospace;text-align:right">{{ gr.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;justify-content:space-between;font:400 10.5px 'IBM Plex Mono',monospace;color:#4d5966;padding-left:88px;padding-right:72px"><span>−25%</span><span>0</span><span style="color:#1d5aa6">+10% bar</span></div>
+            <div style="font-size:13.5px;line-height:1.5;color:#4d5966;margin-top:auto;text-wrap:pretty">Skill = 1 − (model error ÷ naive error). Below zero, the naive guess was better. Tap to flip back.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <div style="flex:1 1 380px;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end">
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">Sleeper cell</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.1;text-wrap:pretty">{{ sleeper.title }}</div>
+          <div style="font-size:13.5px;color:#4d5966;line-height:1.5">{{ sleeper.body }}</div>
+        </div>
+        <sc-if value="{{ sleeper.has }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:18px;align-items:flex-end;height:150px">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="font:500 12px 'IBM Plex Mono',monospace">{{ sleeper.typ }}</div><div style="width:40px;height:{{ sleeper.typH }};background:#b9c1ca;border-radius:3px"></div><div style="font-size:11.5px;color:#4d5966">usual day</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="font:500 12px 'IBM Plex Mono',monospace">{{ sleeper.n }}</div><div style="width:40px;height:112px;background:#eb6834;border-radius:3px"></div><div style="font-size:11.5px;color:#4d5966">that day</div></div>
+        </div></sc-if>
+      </div>
+      <div style="flex:1 1 380px;background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px">
+        <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#4d5966">Declared helper bots</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.1">{{ helpers }} accounts that say they are bots are counted apart</div>
+        <div style="font-size:13.5px;color:#4d5966;line-height:1.5">Weather, news and alert bots that label themselves are neither ghosts nor people. They never enter the Wasted Breath Index.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+      <div style="font-family:'Instrument Serif',serif;font-size:32px;line-height:1.05">Six rules we never break</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+        <sc-for list="{{ rules }}" as="ru" hint-placeholder-count="6">
+          <div style="background:#f8f9fb;border:1px solid rgba(16,22,29,.1);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:8px">
+            <div style="font:500 11px 'IBM Plex Mono',monospace;color:#4d5966">{{ ru.n }}</div>
+            <div style="font-size:17px;font-weight:600">{{ ru.t }}</div>
+            <div style="font-size:13.5px;color:#4d5966;line-height:1.5;text-wrap:pretty">{{ ru.d }}</div>
+            <div style="display:flex;gap:7px;font:400 11px 'IBM Plex Mono',monospace;color:#1d5aa6;margin-top:auto;padding-top:8px;border-top:1px solid rgba(16,22,29,.08)"><span>✓</span><span>{{ ru.c }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<footer style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px;margin-top:8px;border-top:1px solid rgba(16,22,29,.1);font-size:12.5px;color:#4d5966">
+  <div>Roomtone never names an account. Group totals only, groups of 50 or more. No look-up box.</div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px">Practice data from collect.py --simulate · not real accounts</div>
+</footer>
+
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;full&quot;,&quot;reduced&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;startTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;],&quot;default&quot;:&quot;0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;showChecks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;}}">
+const BLUE="#2a78d6",ORANGE="#eb6834",INK="#10161d",MUTED="#4d5966";
+const LN={de:"German",en:"English",es:"Spanish",fr:"French"};
+const LANGS=["de","en","es","fr"];
+const REGIONS=["never sleeps","Americas","Europe/Africa west","East Europe/Middle East","South/Central Asia","East Asia/Pacific"];
+const RNAME={"never sleeps":"Never sleeps","unknown":"Not estimated","Americas":"Americas","Europe/Africa west":"Europe / Africa west","East Europe/Middle East":"East Europe / Mid East","South/Central Asia":"South / Central Asia","East Asia/Pacific":"East Asia / Pacific"};
+const BANDS={"Americas":[-170,-30],"Europe/Africa west":[-30,20],"East Europe/Middle East":[20,55],"South/Central Asia":[55,95],"East Asia/Pacific":[95,180]};
+const VSTYLE={
+  "steered":{cbg:ORANGE,ccolor:INK,cborder:ORANGE,cstyle:"solid",bg:"rgba(235,104,52,.13)",border:"rgba(235,104,52,.45)",bstyle:"solid",desc:"automated-looking accounts turned first, people followed"},
+  "against locals":{cbg:"transparent",ccolor:"#b8461b",cborder:ORANGE,cstyle:"solid",bg:"rgba(235,104,52,.05)",border:"rgba(235,104,52,.45)",bstyle:"solid",desc:"automated-looking accounts push, people hold"},
+  "mirror":{cbg:"#dfe4e9",ccolor:"#3b4652",cborder:"#dfe4e9",cstyle:"solid",bg:"#f1f3f5",border:"rgba(16,22,29,.08)",bstyle:"solid",desc:"automated-looking accounts copy the human mood"},
+  "clean":{cbg:"rgba(42,120,214,.14)",ccolor:"#1d5aa6",cborder:"transparent",cstyle:"solid",bg:"rgba(42,120,214,.05)",border:"rgba(42,120,214,.18)",bstyle:"solid",desc:"almost no automated-looking accounts"},
+  "unclear":{cbg:"transparent",ccolor:MUTED,cborder:"#9aa5b0",cstyle:"dashed",bg:"#f8f9fb",border:"#b9c1ca",bstyle:"dashed",desc:"some difference, no clean pattern"}
+};
+const IMPN={ai_phrase_rate:"Stock phrases",rhythm_cv:"Posting rhythm",posts_per_day:"Posts per day",regret_rate:"Regret rate (deletes)",sleep_gap_h:"Sleep gap",signup_wave:"Sign-up wave"};
+function hl(h){const d=Math.floor(h/24)+1,hr=((h%24)+24)%24,ap=hr<12?"am":"pm",h12=hr%12===0?12:hr%12;return "day "+d+", "+h12+ap;}
+function pct(v,dp){return (v*100).toFixed(dp==null?0:dp)+"%";}
+function fmt(n){return Number(n).toLocaleString("en-US");}
+function sgn(v){return (v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(2);}
+function rib(xa,a0,a1,xb,b0,b1){const m=(xa+xb)/2;return `M${xa},${a0}C${m},${a0} ${m},${b0} ${xb},${b0}L${xb},${b1}C${m},${b1} ${m},${a1} ${xa},${a1}Z`;}
+function bez(x0,y0,x1,y1,t){const m=(x0+x1)/2,u=1-t;return [u*u*u*x0+3*u*u*t*m+3*u*t*t*m+t*t*t*x1,u*u*u*y0+3*u*u*t*y0+3*u*t*t*y1+t*t*t*y1];}
+function rng(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const SUBS={
+election:[
+ {name:"Mail-in voting",w:.24,m:1.9,ex:[["[[Let that sink in.]] Thousands of ballots mailed to addresses that don't exist. [[Do your own research]] before it's too late. the-real-story.example",null,["stock phrase ×2","links the-real-story.example","posts on the hour"],.97,38,41,188,"EN"],["Briefwahl ist ein offenes Tor. [[Wacht endlich auf!]] Teilt das, bevor es gelöscht wird.","Postal voting is an open door. Wake up! Share this before it gets deleted.",["stock phrase","same text on 57 accounts","sign-up wave"],.99,40,63,240,"DE"]]},
+ {name:"Candidate debate",w:.31,m:.6,ex:[["[[It's worth noting that]] both candidates avoided the question on healthcare. [[What are your thoughts?]]",null,["stock phrase ×2","212 posts a day"],.91,45,17,52,"EN"]]},
+ {name:"Polling numbers",w:.18,m:1.1,ex:[["The polls are rigged and everyone knows it. [[Wake up, people.]] wake-up-news.example",null,["stock phrase","links wake-up-news.example","never sleeps"],.95,39,22,96,"EN"]]},
+ {name:"Turnout drives",w:.15,m:.4,ex:[["[[Great initiative!]] Every vote counts. [[Thoughts?]]",null,["stock phrase ×2","replies within 4 s"],.88,50,9,31,"EN"]]},
+ {name:"Fraud claims",w:.12,m:2.6,ex:[["[[They don't want you to know this.]] Machines in three districts flipped votes overnight. truth-now.example",null,["stock phrase","links truth-now.example","account 3 days old"],.98,41,74,310,"EN"],["[[Esto no lo vas a ver en la tele.]] Fraude en las urnas, compártelo ya.","You won't see this on TV. Fraud at the ballot box, share it now.",["stock phrase","same text on 44 accounts","never sleeps"],.99,42,29,133,"ES"]]}],
+ai:[
+ {name:"Chatbots at work",w:.34,m:.9,ex:[["[[As an avid enthusiast of technology,]] I find this development truly fascinating. [[What do you think?]]",null,["stock phrase ×2","posts every 20 min"],.96,30,12,44,"EN"]]},
+ {name:"AI art & copyright",w:.22,m:1.2,ex:[["[[In today's fast-paced digital landscape,]] creativity is evolving. [[Let's discuss!]]",null,["stock phrase ×2","sign-up wave"],.94,55,8,27,"EN"]]},
+ {name:"Regulation",w:.26,m:.7,ex:[["[[It's important to note that]] regulation must balance innovation and safety. [[Thoughts?]]",null,["stock phrase ×2","never sleeps"],.9,61,6,19,"EN"]]},
+ {name:"Job fears",w:.18,m:1.4,ex:[["[[Delve into]] the future of work: five skills you need right now. [[Link in bio.]]",null,["stock phrase ×2","140 posts a day"],.93,66,14,58,"EN"]]}],
+climate:[
+ {name:"Heatwave",w:.36,m:.6,ex:[["[[Absolutely incredible]] how hot it is today! [[Stay safe, everyone!]]",null,["stock phrase ×2","posts on the minute"],.89,20,5,33,"EN"]]},
+ {name:"EV prices",w:.22,m:1.5,ex:[["EVs are a scam. [[Do your own research.]] the-real-story.example",null,["stock phrase","links the-real-story.example"],.95,44,19,71,"EN"]]},
+ {name:"Climate protests",w:.24,m:1.3,ex:[["[[Let that sink in:]] protesters blocked an ambulance again. [[Share if you agree.]]",null,["stock phrase ×2","same text on 23 accounts"],.97,47,26,102,"EN"]]},
+ {name:"Carbon tax",w:.18,m:.8,ex:[["[[It's worth noting that]] the carbon tax affects everyone differently. [[What are your thoughts?]]",null,["stock phrase ×2","never sleeps"],.9,68,4,15,"EN"]]}],
+football:[
+ {name:"Match-day chat",w:.42,m:.5,ex:[["[[What a game!]] [[Incredible atmosphere tonight!]]",null,["stock phrase ×2","posted in 9 matches at once"],.92,21,7,40,"EN"]]},
+ {name:"Transfer rumours",w:.28,m:1.2,ex:[["[[BREAKING:]] sources close to the club confirm the deal is done. [[Stay tuned!]]",null,["stock phrase ×2","posts every 15 min"],.94,43,31,120,"EN"]]},
+ {name:"Referee decisions",w:.2,m:1.1,ex:[["Refs are paid, [[wake up.]] Every single week.",null,["stock phrase","never sleeps"],.87,70,11,36,"EN"]]},
+ {name:"Betting tips",w:.1,m:3.2,ex:[["[[Guaranteed win]] tonight at 12.5 odds. [[DM for the full slip.]]",null,["stock phrase ×2","sign-up wave","300 posts a day"],.99,22,18,64,"EN"]]}],
+housing:[
+ {name:"Rent prices",w:.38,m:.8,ex:[["[[It's no secret that]] rents keep rising. [[What's your experience?]]",null,["stock phrase ×2","replies within 3 s"],.9,33,13,39,"EN"]]},
+ {name:"Mortgage rates",w:.27,m:.9,ex:[["[[Great insights!]] Lower rates are [[a game-changer]] for first-time buyers.",null,["stock phrase ×2","never sleeps"],.91,58,6,22,"EN"]]},
+ {name:"New builds",w:.25,m:1.1,ex:[["[[Let that sink in.]] Luxury flats sit empty while families wait. [[Share this.]]",null,["stock phrase ×2","same text on 19 accounts"],.95,46,21,87,"EN"]]},
+ {name:"Crypto property schemes",w:.1,m:2.5,ppl:38,ex:[]}]
+};
+const SOURCES=[
+ {key:"bluesky",name:"Bluesky",live:true,method:"Jetstream firehose · free, no sign-up · practice stream this run",collected:"posts, replies, likes and deletes",langs:"de en es fr",sc:1,m:{ai:1,climate:1,election:1,football:1,housing:1}},
+ {key:"mastodon",name:"Mastodon",live:false,method:"Public timelines of 40 large instances · streaming API",collected:"posts, replies, favourites and deletes",langs:"de en fr",sc:.46,m:{ai:.55,climate:.5,election:.42,football:.5,housing:.45},val:[312,.978,.91,.0031,.81],helper:.4,sleeper:false},
+ {key:"reddit",name:"Reddit",live:false,method:"Public comments in 60 subreddits · official API",collected:"comments, replies, upvotes and deletes",langs:"en de es",sc:2.3,m:{ai:1.3,climate:.9,election:1.25,football:1.6,housing:1.2},val:[1904,.981,.93,.0022,.74],helper:1.8,sleeper:true},
+ {key:"youtube",name:"YouTube",live:false,method:"Comments on the top 500 videos per topic · Data API",collected:"comments, replies and likes",langs:"en es de fr",sc:1.7,m:{ai:1.6,climate:1.2,election:1.45,football:1.9,housing:1.5},val:[1210,.974,.9,.0035,.69],helper:.2,sleeper:true}
+];
+const SUMA=a=>a.reduce((x,y)=>x+y,0);
+function flowFrom(f,o2a,hum,dest){const origin={},audience={};o2a.forEach(z=>{origin[z.region]=(origin[z.region]||0)+z.accounts;audience[z.audience]=(audience[z.audience]||0)+z.accounts;});return {...f,automated_accounts:SUMA(o2a.map(z=>z.accounts)),origin,audience,origin_to_audience:o2a,humans_targeted_by_replies:hum,destinations:dest};}
+function peakOf(series,T,H){let pk={topic:T[0],hour:0,wasted_breath:0};T.forEach(t=>series[t].forEach((v,h)=>{if(h>=H-24&&v!=null&&v>pk.wasted_breath)pk={topic:t,hour:h,wasted_breath:v};}));return pk;}
+function makeSource(base,S){
+  if(S.key==="bluesky")return base;
+  const m=S.m,sc=S.sc,T=base.topics,mAvg=SUMA(T.map(t=>m[t]))/T.length,cl=v=>Math.max(0,Math.min(0.95,v));
+  const series={};T.forEach((t,i)=>series[t]=base.series[t].map((v,h)=>v==null?null:+cl(v*m[t]*(1+0.12*Math.sin(h*0.7+i*1.9+sc*3))).toFixed(3)));
+  const hd=base.headline,wb=cl(hd.wasted_breath_last_24h*mAvg),eng=Math.round(hd.human_engagements_last_24h*sc),A=hd.accounts;
+  const tot=Math.round(A.total*sc),aut=Math.round(A.automated*sc*mAvg),hel=Math.round(A.helper*S.helper);
+  const gh=base.ghost_by_hour.map((n,h)=>{const e=series.election[h];return (n&&mAvg>=0.8)||(e!=null&&e>0.5)?1:0;});
+  const imm=base.immune.map(i=>i.spike?(m[i.topic]<0.5?{topic:i.topic,spike:false}:{...i,hours_until_recovery:Math.max(1,Math.round(i.hours_until_recovery*m[i.topic]*1.6)),peak:cl(i.peak*m[i.topic])}):i);
+  const tp={...base.trend_peak,official:base.trend_peak.official.map(o=>{const sh=cl((o.share||0)*(m[o.topic]||1));return {...o,share:sh,ghost:sh>0.5,posts:Math.round(o.posts*sc)};})};
+  const at=base.audience_topics.map(r=>{const a=Math.round(r.automated_accounts*sc*m[r.topic]);return {...r,human_accounts:Math.round(r.human_accounts*sc),automated_accounts:a,automated_share:a?cl(r.automated_share*m[r.topic]):0};});
+  const ll=base.leadlag.map(r=>{const a=Math.round((r.automated_accounts||0)*sc*m[r.topic]),hu=Math.round(r.human_accounts*sc);
+    if(a<50)return {...r,human_accounts:hu,automated_accounts:a,verdict:"clean",why:"fewer than 50 automated-looking accounts talk to this audience about this topic",bot_series:null,bot_first_turn_hour:null,human_first_turn_hour:null};return {...r,human_accounts:hu,automated_accounts:a};});
+  const gm=g=>g==="automated"?sc*mAvg:g==="helper"?S.helper:sc;
+  const regions={...base.regions,origin_by_audience:base.regions.origin_by_audience.map(r=>({...r,accounts:Math.round(r.accounts*gm(r.group))})),mismatch:base.regions.mismatch.map(r=>({...r,accounts:Math.round(r.accounts*gm(r.group))}))};
+  const f=base.flow,me=m.election*sc;
+  const flow=flowFrom(f,f.origin_to_audience.map(z=>({...z,accounts:Math.round(z.accounts*me)})),Object.fromEntries(Object.entries(f.humans_targeted_by_replies).map(([k,v])=>[k,Math.round(v*sc)])),f.destinations.map(d=>({...d,bot_links:Math.round(d.bot_links*me),human_links:Math.max(1,Math.round(d.human_links*sc))})));
+  const v=S.val,bv=base.validation;
+  return {...base,series,prev_wb:cl(base.prev_wb*mAvg*0.95),ghost_by_hour:gh,immune:imm,trend_peak:tp,audience_topics:at,leadlag:ll,regions,flow,
+    headline:{...hd,human_engagements_last_24h:eng,to_automated_last_24h:Math.round(eng*wb),wasted_breath_last_24h:wb,one_in:Math.round(1/wb),peak_hour:peakOf(series,T,base.H),accounts:{total:tot,automated:aut,helper:hel,human:tot-aut-hel},ghost_made_trends:SUMA(gh)},
+    validation:{...bv,n_test:v[0],n_train:Math.round(v[0]*2.33),precision_at_threshold:v[1],recall_at_threshold:v[2],false_alarm_rate:v[3],timezone_within_2h:v[4],timezone_accounts_checked:Math.round(bv.timezone_accounts_checked*sc)},
+    sleeper:S.sleeper?base.sleeper.map(c=>({...c,accounts:Math.round(c.accounts*mAvg)})):[]};
+}
+function mergeSources(base,L){
+  const T=base.topics,H=base.H,w=L.map(x=>x.headline.human_engagements_last_24h),eng=SUMA(w);
+  const series={};T.forEach(t=>{series[t]=base.series[t].map((v,h)=>{if(v==null)return null;let n=0,d=0;L.forEach((x,i)=>{const z=x.series[t][h];if(z!=null){n+=w[i]*z;d+=w[i];}});return d?+(n/d).toFixed(3):null;});});
+  const to=SUMA(L.map(x=>x.headline.to_automated_last_24h)),wb=to/eng,acc=k=>SUMA(L.map(x=>x.headline.accounts[k]));
+  const gh=base.ghost_by_hour.map((_,h)=>SUMA(L.map(x=>x.ghost_by_hour[h])));
+  const sp=L.flatMap(x=>x.immune.filter(i=>i.spike));
+  const imm=base.immune.map(i=>{const s=sp.filter(z=>z.topic===i.topic);return s.length?{...s[0],hours_until_recovery:Math.max(...s.map(z=>z.hours_until_recovery)),peak:Math.max(...s.map(z=>z.peak))}:i;});
+  const at=base.audience_topics.map((r,j)=>{const hs=SUMA(L.map(x=>x.audience_topics[j].human_accounts)),as=SUMA(L.map(x=>x.audience_topics[j].automated_accounts));return {...r,human_accounts:hs,automated_accounts:as,automated_share:as?SUMA(L.map(x=>x.audience_topics[j].automated_share*x.audience_topics[j].human_accounts))/hs:0};});
+  const ll=base.leadlag.map((r,j)=>({...r,human_accounts:SUMA(L.map(x=>x.leadlag[j].human_accounts)),automated_accounts:SUMA(L.map(x=>x.leadlag[j].automated_accounts||0))}));
+  const sr=(arr,get)=>arr.map((r,j)=>({...r,accounts:SUMA(L.map(x=>get(x)[j].accounts))}));
+  const f=base.flow,flow=flowFrom(f,f.origin_to_audience.map((z,j)=>({...z,accounts:SUMA(L.map(x=>x.flow.origin_to_audience[j].accounts))})),Object.fromEntries(Object.keys(f.humans_targeted_by_replies).map(k=>[k,SUMA(L.map(x=>x.flow.humans_targeted_by_replies[k]))])),f.destinations.map((d,j)=>({...d,bot_links:SUMA(L.map(x=>x.flow.destinations[j].bot_links)),human_links:SUMA(L.map(x=>x.flow.destinations[j].human_links))})));
+  const nt=SUMA(L.map(x=>x.validation.n_test)),wv=k=>SUMA(L.map(x=>x.validation[k]*x.validation.n_test))/nt;
+  const cells=L.flatMap(x=>x.sleeper).sort((a,b)=>b.accounts-a.accounts);
+  return {...base,series,prev_wb:SUMA(L.map((x,i)=>x.prev_wb*w[i]))/eng,ghost_by_hour:gh,immune:imm,audience_topics:at,leadlag:ll,flow,
+    regions:{...base.regions,origin_by_audience:sr(base.regions.origin_by_audience,x=>x.regions.origin_by_audience),mismatch:sr(base.regions.mismatch,x=>x.regions.mismatch)},
+    headline:{...base.headline,human_engagements_last_24h:eng,to_automated_last_24h:to,wasted_breath_last_24h:wb,one_in:Math.round(1/wb),peak_hour:peakOf(series,T,H),accounts:{total:acc("total"),automated:acc("automated"),helper:acc("helper"),human:acc("human")},ghost_made_trends:SUMA(gh),official_trend_slots:base.headline.official_trend_slots*L.length},
+    validation:{...base.validation,n_test:nt,n_train:SUMA(L.map(x=>x.validation.n_train)),precision_at_threshold:wv("precision_at_threshold"),recall_at_threshold:wv("recall_at_threshold"),false_alarm_rate:wv("false_alarm_rate"),timezone_within_2h:wv("timezone_within_2h"),timezone_accounts_checked:SUMA(L.map(x=>x.validation.timezone_accounts_checked))},
+    sleeper:cells.slice(0,1)};
+}
+function hourlyAvg(d){return [...Array(d.H)].map((_,h)=>{const vs=d.topics.map(t=>d.series[t][h]).filter(z=>z!=null);return vs.length?SUMA(vs)/vs.length:null;});}
+function topicMean(d,t){const vs=d.series[t].filter(z=>z!=null);return vs.length?SUMA(vs)/vs.length:null;}
+const CL=44,CW=940,CT=14,CH=252;
+
+class Component extends DCLogic {
+  state={source:"all",sub:null,tab:null,topic:"election",lang:"de",mtopic:"election",hoverH:null,region:null,flipped:false,sound:false,tide:0,drawn:false,markers:false,ready:!!window.RT};
+  heroRef=React.createRef();heroWrap=React.createRef();countRef=React.createRef();globeRef=React.createRef();flowRef=React.createRef();chartRef=React.createRef();
+
+  data(key){const k=key??this.state.source??"all";this._cache=this._cache||{};if(this._cache[k])return this._cache[k];const base=window.RT;
+    const RS=base.sources||{};SOURCES.forEach(S=>{const r=RS[S.key];if(r){S.live=!!r.live;S.method=r.method||S.method;S.collected=r.collected||S.collected;S.langs=r.langs||S.langs;S.practice=!!r.practice;}});const d=k==="all"?mergeSources(base,SOURCES.map(S=>this.data(S.key))):(RS[k]?RS[k]:makeSource(base,SOURCES.find(S=>S.key===k)));return this._cache[k]=d;}
+  setSource(k){if(k===this.state.source)return;this._flow=null;this.setState({source:k,sub:null},()=>{cancelAnimationFrame(this._raf);this.startHero();if(this.state.tab===1)this.redrawMood();});}
+  reduced(){const m=this.props.motion??"auto";if(m==="reduced")return true;if(m==="full")return false;return !!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}
+  componentDidMount(){
+    const go=()=>{if(!window.RT){this._poll=setTimeout(go,60);return;}
+      const sp=String(this.props.startTab??"0"),st=sp==="0"?4:parseInt(sp,10)-1;
+      this.setState({ready:true,tab:this.state.tab??(isNaN(st)?0:st)},()=>{this.startHero();this.onTab();});};
+    go();
+    const loadLand=()=>{if(!window.topojson||!window.d3){this._lp=setTimeout(loadLand,120);return;}fetch("assets/land-110m.json").then(r=>r.json()).then(tp=>{this.land=topojson.feature(tp,tp.objects.land);}).catch(()=>{});};loadLand();
+    this._onScroll=()=>{const el=this.heroWrap.current;if(el&&!this.reduced())el.style.transform='none';};
+    window.addEventListener("scroll",this._onScroll,{passive:true});
+    this._onResize=()=>{if(this.reduced())this.drawHero(99,true);};
+    window.addEventListener("resize",this._onResize);
+  }
+  componentWillUnmount(){clearTimeout(this._poll);clearTimeout(this._lp);clearTimeout(this._t1);clearTimeout(this._t2);cancelAnimationFrame(this._raf);cancelAnimationFrame(this._raf3);window.removeEventListener("scroll",this._onScroll);window.removeEventListener("resize",this._onResize);}
+
+  setTab(i){if(i===this.state.tab)return;this.setState({tab:i,tide:0,drawn:false,markers:false,flipped:false,hoverH:null},()=>this.onTab());}
+  onTab(){const tab=this.state.tab,red=this.reduced();clearTimeout(this._t1);clearTimeout(this._t2);
+    if(tab===0){if(red)this.setState({tide:1});else this._t1=setTimeout(()=>this.setState({tide:1}),120);}
+    if(tab===1)this.redrawMood();
+    cancelAnimationFrame(this._raf3);if(tab===2)this.startLoop3();}
+  redrawMood(){const red=this.reduced();clearTimeout(this._t1);clearTimeout(this._t2);
+    if(red){this.setState({drawn:true,markers:true});return;}
+    this.setState({drawn:false,markers:false},()=>{this._t1=setTimeout(()=>this.setState({drawn:true}),60);this._t2=setTimeout(()=>{this.setState({markers:true});this.tick();},1550);});}
+  tick(){if(!this.state.sound)return;try{const ac=this._ac||(this._ac=new (window.AudioContext||window.webkitAudioContext)());[0,0.14].forEach(d=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=1760;o.type="square";g.gain.setValueAtTime(0.0001,ac.currentTime+d);g.gain.exponentialRampToValueAtTime(0.12,ac.currentTime+d+0.004);g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+d+0.05);o.connect(g).connect(ac.destination);o.start(ac.currentTime+d);o.stop(ac.currentTime+d+0.06);});}catch(e){}}
+
+  startHero(){
+    const RT=this.data(),r=rng(11),N=100,nA=Math.round(RT.headline.wasted_breath_last_24h*100);
+    const idx=[...Array(N).keys()].sort(()=>r()-0.5),auto=new Set(idx.slice(0,nA));
+    this.figs=[...Array(N)].map((_,i)=>({u:-0.95+r()*1.9,v:0.04+r()*0.78,auto:auto.has(i),p1:r()*6.28,p2:r()*6.28,f1:.6+r()*.9,f2:.6+r()*.9})).sort((a,b)=>a.v-b.v);
+    const red=this.reduced(),t0=performance.now();
+    if(red){this.drawHero(99,true);return;}
+    const f=(now)=>{this.drawHero((now-t0)/1000,false);this._raf=requestAnimationFrame(f);};this._raf=requestAnimationFrame(f);
+  }
+  drawHero(t,red){
+    const c=this.heroRef.current;if(!c||!this.figs)return;const RT=this.data();
+    const dpr=Math.min(2,window.devicePixelRatio||1),w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;
+    if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);}
+    const x=c.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);
+    const cx=w*0.5,yb=h*0.06,yf=h*1.0,hw=w*0.58;
+    const P=(u,v)=>{const s=0.5+0.5*v;return [cx+u*hw*s,yb+(yf-yb)*(v*0.62+v*v*0.38)];};
+    const bl=P(-1,0),br=P(1,0);
+    x.strokeStyle="rgba(170,190,215,0.06)";x.lineWidth=1;
+    for(let u=-1;u<=1.001;u+=0.125){const top=P(u,0);x.beginPath();x.moveTo(top[0],top[1]);x.lineTo(top[0],0);x.stroke();}
+    x.strokeStyle="rgba(170,190,215,0.14)";x.beginPath();x.moveTo(bl[0],0);x.lineTo(bl[0],bl[1]);x.lineTo(br[0],br[1]);x.lineTo(br[0],0);x.stroke();
+    x.strokeStyle="rgba(170,190,215,0.07)";
+    for(let u=-1;u<=1.001;u+=0.125){const a=P(u,0),b=P(u,1);x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();}
+    for(let v=0;v<=1.001;v+=0.1){const a=P(-1,v),b=P(1,v);x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();}
+    const sp=P(0,0.55),g=x.createRadialGradient(sp[0],sp[1],0,sp[0],sp[1],hw*0.8);g.addColorStop(0,"rgba(120,160,210,0.10)");g.addColorStop(1,"rgba(120,160,210,0)");x.fillStyle=g;x.fillRect(0,0,w,h);
+    let p=red?1:Math.min(1,Math.max(0,(t-0.6)/1.9));p=1-Math.pow(1-p,3);
+    const share=RT.headline.wasted_breath_last_24h*p*100,txt=share.toFixed(1)+"%";
+    if(this.countRef.current&&this.countRef.current.textContent!==txt)this.countRef.current.textContent=txt;
+    const beat=red?0:Math.pow(Math.max(0,Math.cos(t*Math.PI*2)),18);
+    const k=Math.min(1.4,Math.max(0.75,w/900));
+    for(const f of this.figs){
+      let u=f.u,v=f.v;
+      if(!f.auto&&!red){u+=0.05*Math.sin(t*0.23*f.f1+f.p1)+0.028*Math.sin(t*0.51*f.f2+f.p2);v+=0.028*Math.sin(t*0.19*f.f2+f.p1*1.3);}
+      const [sx,sy]=P(u,v),sc=(0.55+0.6*v)*k;let r=3.1*sc;
+      if(f.auto)r*=1+0.16*beat;
+      x.fillStyle="rgba(0,0,0,0.45)";x.beginPath();x.ellipse(sx,sy,r*2.1,r*0.65,0,0,Math.PI*2);x.fill();
+      if(f.auto){
+        const a=1-0.74*p;
+        x.strokeStyle=`rgba(235,104,52,${0.18+0.55*beat})`;x.lineWidth=1;x.beginPath();x.ellipse(sx,sy,r*(2.6+beat*1.6),r*(0.8+beat*0.5),0,0,Math.PI*2);x.stroke();
+        const gg=x.createRadialGradient(sx,sy-r*3,0,sx,sy-r*3,r*6);gg.addColorStop(0,`rgba(235,104,52,${(0.32+0.25*beat)*a})`);gg.addColorStop(1,"rgba(235,104,52,0)");x.fillStyle=gg;x.fillRect(sx-r*6,sy-r*9,r*12,r*12);
+        x.globalAlpha=a;x.strokeStyle="#eb6834";x.fillStyle="#eb6834";
+        x.lineCap="round";x.lineWidth=r*1.45;x.beginPath();x.moveTo(sx,sy-r*0.9);x.lineTo(sx,sy-r*3.2);x.stroke();
+        x.beginPath();x.arc(sx,sy-r*4.5,r*0.95,0,Math.PI*2);x.fill();
+        if(p>0.5){x.globalAlpha=0.55*p;x.lineWidth=1;x.setLineDash([2,2]);x.beginPath();x.arc(sx,sy-r*4.5,r*1.5,0,Math.PI*2);x.stroke();x.setLineDash([]);}
+        x.globalAlpha=1;
+      }else{
+        const gg=x.createRadialGradient(sx,sy-r*3,0,sx,sy-r*3,r*6);gg.addColorStop(0,"rgba(42,120,214,0.38)");gg.addColorStop(1,"rgba(42,120,214,0)");x.fillStyle=gg;x.fillRect(sx-r*6,sy-r*9,r*12,r*12);
+        x.strokeStyle="#5b9ff0";x.fillStyle="#8cbcf6";x.lineCap="round";x.lineWidth=r*1.45;x.beginPath();x.moveTo(sx,sy-r*0.9);x.lineTo(sx,sy-r*3.2);x.stroke();
+        x.beginPath();x.arc(sx,sy-r*4.5,r*0.95,0,Math.PI*2);x.fill();
+      }
+    }
+  }
+
+  startLoop3(){const red=this.reduced(),t0=performance.now();
+    const f=(now)=>{if(this.state.tab!==2)return;const t=red?4:(now-t0)/1000;this.drawGlobe(t,red);this.drawFlow(t,red);this._raf3=requestAnimationFrame(f);};
+    this._raf3=requestAnimationFrame(f);}
+  sizeCanvas(c){const dpr=Math.min(2,window.devicePixelRatio||1),w=c.clientWidth,h=c.clientHeight;if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);}const x=c.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);return [x,w,h];}
+  drawGlobe(t,red){
+    const c=this.globeRef.current,d3=window.d3;if(!c||!d3)return;const [x,w,h]=this.sizeCanvas(c);if(!w)return;x.clearRect(0,0,w,h);
+    if(!this.rot)this.rot=[-10,-20];
+    const reg=this.state.region,band=BANDS[reg];
+    if(this.lastReg!==reg){this.aim=band?-(band[0]+band[1])/2:null;this.lastReg=reg;}
+    if(!this.dragging){if(this.aim!=null){const d=((this.aim-this.rot[0])%360+540)%360-180;this.rot[0]+=red?d:d*0.08;if(Math.abs(d)<0.05)this.aim=null;}else if(!red&&!this.touched)this.rot[0]+=0.08;}
+    const R=Math.min(w,h)*0.37,cx=w/2,cy=h*0.54;
+    const pr=d3.geoOrthographic().scale(R).translate([cx,cy]).rotate(this.rot).clipAngle(90).precision(0.6),path=d3.geoPath(pr,x);
+    x.beginPath();path({type:"Sphere"});x.fillStyle="#16202a";x.fill();
+    x.beginPath();path(d3.geoGraticule10());x.strokeStyle="rgba(200,212,224,.07)";x.lineWidth=.6;x.stroke();
+    if(this.land){x.beginPath();path(this.land);x.fillStyle="#3a4857";x.fill();x.strokeStyle="rgba(210,222,234,.35)";x.lineWidth=.6;x.stroke();}
+    if(band){x.beginPath();path(d3.geoGraticule().extent([[band[0],-72],[band[1],72]]).outline());x.fillStyle="rgba(42,120,214,.30)";x.fill();x.strokeStyle="rgba(140,188,246,.85)";x.lineWidth=1.2;x.stroke();}
+    const now=new Date(),utc=now.getUTCHours()+now.getUTCMinutes()/60,doy=Math.floor((now-new Date(Date.UTC(now.getUTCFullYear(),0,0)))/864e5);
+    const sunLon=(12-utc)*15,decl=-23.44*Math.cos(2*Math.PI/365*(doy+10));
+    const night=d3.geoCircle().center([sunLon+180,-decl]).radius(90)();
+    x.beginPath();path(night);x.fillStyle="rgba(4,7,11,.52)";x.fill();x.strokeStyle="rgba(235,200,120,.55)";x.lineWidth=1;x.stroke();
+    if(band){const row=this.sleepData().rows.find(r=>r.key===reg),mid=(band[0]+band[1])/2,ctr=[-this.rot[0],-this.rot[1]];
+      [[row&&row.h,BLUE,38,-4],[row&&row.a,ORANGE,24,4]].forEach(([val,col,lat,off])=>{if(val==null)return;const p=[mid+off,lat];if(d3.geoDistance(p,ctr)>Math.PI/2-0.05)return;const q=pr(p),len=0.12+val*1.1,e=[cx+(q[0]-cx)*(1+len),cy+(q[1]-cy)*(1+len)];
+        x.strokeStyle=col;x.lineWidth=4;x.lineCap="round";x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(e[0],e[1]);x.stroke();x.fillStyle=col;x.beginPath();x.arc(e[0],e[1],4,0,Math.PI*2);x.fill();});}
+    if(reg==="never sleeps"){const pu=red?0.6:0.35+0.45*Math.pow(Math.max(0,Math.cos(t*Math.PI*2)),10);x.strokeStyle=`rgba(235,104,52,${pu})`;x.lineWidth=2;x.setLineDash([3,5]);x.beginPath();x.arc(cx,cy,R*1.1,0,Math.PI*2);x.stroke();x.setLineDash([]);}
+    x.beginPath();path({type:"Sphere"});x.strokeStyle="rgba(200,212,224,.22)";x.lineWidth=1;x.stroke();
+  }
+  drawFlow(t,red){
+    const c=this.flowRef.current,F=this._flow;if(!c||!F)return;const [x,w,h]=this.sizeCanvas(c);if(!w)return;x.clearRect(0,0,w,h);
+    const k=w/1000;if(!F.parts){const r=rng(5);F.parts=[];F.r1s.forEach(s=>{if(!s.n)return;const n=Math.max(1,Math.round(s.n/5));for(let i=0;i<n;i++)F.parts.push({s,off:0.15+r()*0.7,off2:0.15+r()*0.7,ph:r()*2,sp:0.13+r()*0.06});});}
+    for(const p of F.parts){const u=(t*p.sp+p.ph)%2;let pt,al;
+      if(u<1){pt=bez(F.X0+12,p.s.oy0+(p.s.oy1-p.s.oy0)*p.off,F.X1,p.s.ay0+(p.s.ay1-p.s.ay0)*p.off,u);al=Math.min(1,u*6);}
+      else{const a=p.s.a,uu=u-1;pt=bez(F.X1+12,a.y0+a.h*p.off2,F.X2,a.py0+a.ph*p.off2,uu);al=Math.min(1,(1-uu)*5);}
+      x.globalAlpha=0.85*al;x.fillStyle=ORANGE;x.beginPath();x.arc(pt[0]*k,pt[1]*k,1.9*Math.max(1,k),0,Math.PI*2);x.fill();}
+    x.globalAlpha=1;
+  }
+
+  getFlow(){if(this._flow)return this._flow;const f=this.data().flow;
+    const TOP=40,AV=370,X0=250,X1=560,X2=842;
+    const ORD=["never sleeps","unknown","Europe/Africa west","East Europe/Middle East","Americas","South/Central Asia","East Asia/Pacific"];
+    const origins=ORD.filter(o=>f.origin[o]).map(o=>({key:o,n:f.origin[o]}));
+    const tot=origins.reduce((a,o)=>a+o.n,0),g1=16,k=(AV-g1*(origins.length-1))/tot;
+    let y=TOP;origins.forEach(o=>{o.y0=y;o.h=Math.max(2,o.n*k);o.y1=y+o.h;o.cur=y;y=o.y1+g1;});
+    const AUD=["de","es","en"].filter(a=>f.audience[a]),g2=34;
+    const aspan=AUD.reduce((s,a)=>s+f.audience[a]*k,0)+g2*(AUD.length-1);let ay=TOP+(AV-aspan)/2;
+    const auds=AUD.map(a=>{const h=f.audience[a]*k,o={key:a,n:f.audience[a],y0:ay,h,y1:ay+h,cur:ay,dir:f.direction[a],people:f.humans_targeted_by_replies[a]};ay+=h+g2;return o;});
+    const ptot=auds.reduce((s,a)=>s+a.people,0),k3=(AV-g2*(auds.length-1))/ptot;let py=TOP;
+    auds.forEach(a=>{a.py0=py;a.ph=a.people*k3;py+=a.ph+g2;});
+    const r1s=[];origins.forEach(o=>auds.forEach(a=>{const l=f.origin_to_audience.find(z=>z.region===o.key&&z.audience===a.key);if(!l)return;const hh=l.accounts*k;r1s.push({oy0:o.cur,oy1:o.cur+hh,ay0:a.cur,ay1:a.cur+hh,n:l.accounts,a});o.cur+=hh;a.cur+=hh;}));
+    this._flow={X0,X1,X2,X0e:X0+12,r1s,
+      r1:r1s.map(s=>({d:rib(X0+12,s.oy0,s.oy1,X1,s.ay0,s.ay1)})),
+      r2:auds.map(a=>({d:rib(X1+12,a.y0,a.y1,X2,a.py0,a.py0+a.ph)})),
+      origins:origins.map(o=>({y0:o.y0,h:o.h,name:RNAME[o.key]||o.key,n:fmt(o.n),lx:X0-10,ly:o.y0+o.h/2+4})),
+      auds:auds.map(a=>({y0:a.y0,h:a.h,py0:a.py0,ph:a.ph,name:LN[a.key],n:a.n,people:fmt(a.people),lx:X1+22,ly:a.y0+a.h/2-3,ly2:a.y0+a.h/2+13,dirText:"pushing "+(a.dir<0?"negative":"positive")+" ("+sgn(a.dir)+")",plx:X2+22,ply:a.py0+a.ph/2-2,ply2:a.py0+a.ph/2+14}))};
+    return this._flow;}
+
+  sleepData(){const RT=this.data(),L=this.state.lang,src=RT.regions.origin_by_audience.filter(r=>r.lang===L);
+    const g=(grp,reg)=>{const r=src.find(z=>z.group===grp&&z.region===reg);return r?r.share:null;};
+    const hasA=src.some(z=>z.group==="automated");
+    const mm=RT.regions.mismatch,nh=(mm.find(m=>m.lang===L&&m.group==="human")||{}).accounts||0,na=(mm.find(m=>m.lang===L&&m.group==="automated")||{}).accounts||0;
+    return {nh,na,rows:REGIONS.map(reg=>({key:reg,h:g("human",reg)??0,a:hasA&&na>=50?(g("automated",reg)??0):null}))};}
+
+  renderVals(){
+    if(!window.RT)return {ready:false};const RT=this.data();
+    const s=this.state,H=RT.H,hd=RT.headline,v=RT.validation,tab=s.tab??0,showChecks=this.props.showChecks??true;
+    const X=h=>CL+h*CW/(H-1),Y=val=>CT+CH*(1-val/0.8);
+    const at=(l,t)=>RT.audience_topics.find(r=>r.lang===l&&r.topic===t),ll=(l,t)=>RT.leadlag.find(r=>r.lang===l&&r.topic===t);
+    const prevOneIn=Math.round(1/RT.prev_wb),down=hd.wasted_breath_last_24h<RT.prev_wb;
+    const imm=RT.immune.find(i=>i.spike),cell=RT.sleeper[0];
+    const pubFc=Object.entries(RT.forecast).filter(([k,f])=>f.grade&&f.grade.publishable);
+    const bestFc=Object.entries(RT.forecast).filter(([k,f])=>f.grade&&f.grade.skill_vs_naive!=null).sort((a,b)=>b[1].grade.skill_vs_naive-a[1].grade.skill_vs_naive)[0];
+    const changes=[
+      {rule:"wb.delta",text:`1 in ${hd.one_in} human replies and likes went to automated-looking accounts, ${down?"down":"up"} from 1 in ${prevOneIn} the day before.`},
+      {rule:"wb.peak_hour",text:`#${hd.peak_hour.topic} had the highest hourly share: ${pct(hd.peak_hour.wasted_breath)} at ${hl(hd.peak_hour.hour)}.`},
+      {rule:"trends.ghost_made",text:`${hd.ghost_made_trends} of ${hd.official_trend_slots} trending slots were ghost-made.`},
+      ...RT.leadlag.filter(r=>r.verdict==="steered").map(r=>({rule:"mood.steered",text:`${LN[r.lang]} audience, #${r.topic}: automated-looking accounts turned first; people followed ${r.human_first_turn_hour-r.bot_first_turn_hour} h later.`})),
+      ...RT.leadlag.filter(r=>r.verdict==="against locals").map(r=>{const a=at(r.lang,r.topic);return {rule:"mood.against_locals",text:`${LN[r.lang]} audience, #${r.topic}: automated-looking accounts push ${a.bot_mood<0?"negative":"positive"} (${sgn(a.bot_mood)}) while people stay ${a.human_mood>=0?"positive":"negative"} (${sgn(a.human_mood)}).`};}),
+      ...(cell?[{rule:"accounts.sleeper_cell",text:`${cell.accounts} accounts created on one day (usual: ${cell.typical_per_day}) stayed silent, then woke together.`}]:[]),
+      {rule:"forecast.grade",text:pubFc.length?`Tomorrow's ghost forecast is published for ${pubFc.map(p=>"#"+p[0]).join(", ")}.`:`Tomorrow's ghost forecast is withheld: it did not beat "tomorrow looks like today".`}
+    ,...((RT.extra_changes||[]).map(t=>({rule:"cross-source",text:t})))].slice(0,8).map((c,i)=>({...c,n:String(i+1).padStart(2,"0")}));
+    const tiles=[
+      {label:"Ghost-made trend slots",value:`${hd.ghost_made_trends}`,unit:`of ${hd.official_trend_slots}`,sub:"Trending slots where most posts came from automated-looking accounts.",check:"Slot counted only when 50+ people took part"},
+      {label:"Immune response time",value:imm?`${imm.hours_until_recovery}`:"—",unit:imm?"hours":"",sub:imm?`How long people kept feeding the manufactured #${imm.topic} push before it faded.`:"No manufactured trend detected.",check:`${RT.immune.filter(i=>i.spike).length} push detected in ${H} h · peak ${imm?pct(imm.peak):"—"}`},
+      {label:"Automated-looking accounts",value:fmt(hd.accounts.automated),unit:`of ${fmt(hd.accounts.total)}`,sub:`${pct(hd.accounts.automated/hd.accounts.total)} of accounts scored. ${hd.accounts.helper} declared helper bots kept separate.`,check:`Recall ${pct(v.recall_at_threshold,1)} on held-out accounts`},
+      {label:"False-alarm rate",value:pct(v.false_alarm_rate,2),unit:"",sub:"Real people wrongly scored as automated-looking. Published every run.",check:`Tested on ${fmt(v.n_test)} held-out accounts`}
+    ];
+    const TABQ=["How much attention is lost?","Who steers whom?","Where from, where to?","Can we trust it?"];
+    const tabs=[{i:4,num:"00",q:"All datasets"},...TABQ.map((q,i)=>({i,num:"0"+(i+1),q}))].map(o=>({...o,onClick:()=>this.setTab(o.i),line:o.i===tab?INK:"transparent",color:o.i===tab?INK:MUTED}));
+    const SRCS=[{key:"all",name:"All sources",live:true},...SOURCES],curS=SRCS.find(z=>z.key===(s.source||"all"));
+    const srcSeg=SRCS.map(z=>{const sel=z.key===curS.key;return {name:z.name,onClick:()=>this.setSource(z.key),bg:sel?"#fff":"transparent",color:sel?INK:MUTED,sh:sel?"0 1px 2px rgba(16,22,29,.12)":"none",dot:z.key==="all"?INK:z.live?"#2f9a5f":"transparent",dotStyle:z.live||z.key==="all"?"solid":"dashed",dotBorder:z.key==="all"?INK:z.live?"#2f9a5f":"#8a96a3"};});
+    const srcNote=curS.key==="all"?`4 sources combined, weighted by human engagements · ${fmt(hd.human_engagements_last_24h)} engagements in 24 h`:curS.live?"Live · Jetstream firehose (practice stream this run)":"Prototype · modelled from the Bluesky run to show the filter, not collected";
+    const srcShort=curS.key==="all"?"ALL SOURCES":curS.name.toUpperCase()+(curS.live?"":" · PROTOTYPE");
+    const out={ready:true,srcSeg,srcNote,srcShort,isT4:tab===4,showChecks,H,oneIn:hd.one_in,lastRun:hl(H),deltaText:`${down?"↓":"↑"} from 1 in ${prevOneIn} yesterday · ${pct(RT.prev_wb,1)} → ${pct(hd.wasted_breath_last_24h,1)}`,changes,tiles,tabs,
+      isT0:tab===0,isT1:tab===1,isT2:tab===2,isT3:tab===3,heroRef:this.heroRef,heroWrap:this.heroWrap,countRef:this.countRef,globeRef:this.globeRef,flowRef:this.flowRef,chartRef:this.chartRef,
+      threshold:v.threshold,precision:pct(v.precision_at_threshold,1),topic:s.topic,method:v.method};
+    const xTicks=[];for(let h=0;h<H;h+=12)xTicks.push({x:X(h),label:h%24===0?"Day "+(h/24+1):"noon"});out.xTicks=xTicks;
+
+    if(tab===4){
+      const cur=s.source||"all";
+      out.allBtn=cur==="all"?{label:"Showing all sources",bg:INK,color:"#f3f6f9",border:INK}:{label:"Show all sources",bg:"#fff",color:INK,border:"rgba(16,22,29,.14)"};
+      out.showAll=()=>this.setSource("all");
+      const spark=d=>{const a=hourlyAvg(d);let p="",pen=false;a.forEach((v,h)=>{if(v==null){pen=false;return;}p+=(pen?"L":"M")+(h/(d.H-1)*300).toFixed(1)+","+(57-Math.min(v,0.6)/0.6*54).toFixed(1);pen=true;});return p;};
+      out.dsCards=SOURCES.map(S=>{const d=this.data(S.key),h2=d.headline,sel=cur===S.key;
+        return {name:S.name,status:S.live?"Live":(S.practice?"Practice":"Prototype"),stBg:S.live?"rgba(47,154,95,.12)":"transparent",stColor:S.live?"#1f6e43":(S.practice?"#1d5aa6":"#b8461b"),stBorder:S.live?"rgba(47,154,95,.35)":(S.practice?"rgba(42,120,214,.4)":"rgba(235,104,52,.5)"),
+          method:S.method,collected:S.collected,oneIn:h2.one_in,wb:pct(h2.wasted_breath_last_24h,1),spark:spark(d),
+          facts:[{k:"Engagements 24 h",v:fmt(h2.human_engagements_last_24h)},{k:"Accounts scored",v:fmt(h2.accounts.total)},{k:"Automated-looking",v:pct(h2.accounts.automated/h2.accounts.total,1)},{k:"False alarms",v:pct(d.validation.false_alarm_rate,2)},{k:"Window",v:d.H+" h"},{k:"Languages",v:S.langs}],
+          bg:sel?"#fff":"#f8f9fb",border:sel?INK:"rgba(16,22,29,.1)",ring:sel?"0 0 0 1px "+INK:"none",
+          btn:sel?"Filtering to this source":"Filter to "+S.name,btnBg:sel?INK:"#fff",btnColor:sel?"#f3f6f9":INK,btnBorder:sel?INK:"rgba(16,22,29,.14)",onClick:()=>this.setSource(S.key)};});
+      out.topicsAll=RT.topics;
+      out.heat=[{key:"all",name:"All sources"},...SOURCES].map(S=>{const d=this.data(S.key),sel=cur===S.key;return {name:S.name,weight:sel?600:400,dot:sel?INK:"transparent",onClick:()=>this.setSource(S.key),
+        cells:RT.topics.map(t=>{const m=topicMean(d,t);return {v:m==null?"—":pct(m,1),bg:m==null?"transparent":`rgba(235,104,52,${Math.min(0.85,0.06+m/0.35*0.8).toFixed(2)})`,ring:sel?"inset 0 0 0 1.5px "+INK:"none"};})};});
+      out.checkHead=["Source","Tested","Precision","Recall","False alarms"];
+      out.checkRows=[{key:"all",name:"All sources"},...SOURCES].map(S=>{const vv=this.data(S.key).validation;return [S.name,fmt(vv.n_test),pct(vv.precision_at_threshold,1),pct(vv.recall_at_threshold,1),pct(vv.false_alarm_rate,2)];});
+    }
+    if(tab===4){
+      const cur=s.source||"all";
+      out.allBtn=cur==="all"?{label:"Showing all sources",bg:INK,color:"#f3f6f9",border:INK}:{label:"Show all sources",bg:"#fff",color:INK,border:"rgba(16,22,29,.14)"};
+      out.showAll=()=>this.setSource("all");
+      const spark=d=>{const a=hourlyAvg(d);let p="",pen=false;a.forEach((v,h)=>{if(v==null){pen=false;return;}p+=(pen?"L":"M")+(h/(d.H-1)*300).toFixed(1)+","+(57-Math.min(v,0.6)/0.6*54).toFixed(1);pen=true;});return p;};
+      out.dsCards=SOURCES.map(S=>{const d=this.data(S.key),h2=d.headline,sel=cur===S.key;
+        return {name:S.name,status:S.live?"Live":(S.practice?"Practice":"Prototype"),stBg:S.live?"rgba(47,154,95,.12)":"transparent",stColor:S.live?"#1f6e43":(S.practice?"#1d5aa6":"#b8461b"),stBorder:S.live?"rgba(47,154,95,.35)":(S.practice?"rgba(42,120,214,.4)":"rgba(235,104,52,.5)"),
+          method:S.method,collected:S.collected,oneIn:h2.one_in,wb:pct(h2.wasted_breath_last_24h,1),spark:spark(d),
+          facts:[{k:"Engagements 24 h",v:fmt(h2.human_engagements_last_24h)},{k:"Accounts scored",v:fmt(h2.accounts.total)},{k:"Automated-looking",v:pct(h2.accounts.automated/h2.accounts.total,1)},{k:"False alarms",v:pct(d.validation.false_alarm_rate,2)},{k:"Window",v:d.H+" h"},{k:"Languages",v:S.langs}],
+          bg:sel?"#fff":"#f8f9fb",border:sel?INK:"rgba(16,22,29,.1)",ring:sel?"0 0 0 1px "+INK:"none",
+          btn:sel?"Filtering to this source":"Filter to "+S.name,btnBg:sel?INK:"#fff",btnColor:sel?"#f3f6f9":INK,btnBorder:sel?INK:"rgba(16,22,29,.14)",onClick:()=>this.setSource(S.key)};});
+      out.topicsAll=RT.topics;
+      out.heat=[{key:"all",name:"All sources"},...SOURCES].map(S=>{const d=this.data(S.key),sel=cur===S.key;return {name:S.name,weight:sel?600:400,dot:sel?INK:"transparent",onClick:()=>this.setSource(S.key),
+        cells:RT.topics.map(t=>{const m=topicMean(d,t);return {v:m==null?"—":pct(m,1),bg:m==null?"transparent":`rgba(235,104,52,${Math.min(0.85,0.06+m/0.35*0.8).toFixed(2)})`,ring:sel?"inset 0 0 0 1.5px "+INK:"none"};})};});
+      out.checkHead=["Source","Tested","Precision","Recall","False alarms"];
+      out.checkRows=[{key:"all",name:"All sources"},...SOURCES].map(S=>{const vv=this.data(S.key).validation;return [S.name,fmt(vv.n_test),pct(vv.precision_at_threshold,1),pct(vv.recall_at_threshold,1),pct(vv.false_alarm_rate,2)];});
+    }
+    if(tab===0){
+      out.topicChips=RT.topics.map(t=>({name:t,onClick:()=>this.setState({topic:t,sub:null}),bg:t===s.topic?INK:"#fff",color:t===s.topic?"#f3f6f9":INK,border:t===s.topic?INK:"rgba(16,22,29,.14)",dot:t===s.topic?ORANGE:"#b9c1ca"}));
+      const seg=arr=>{let d="",pen=false;arr.forEach((val,h)=>{if(val==null){pen=false;return;}const px=X(h).toFixed(1),py=Y(Math.min(val,0.8)).toFixed(1);const nx=arr[h+1];if(!pen){d+=`M${px},${py}`;if(nx==null)d+="l0.01,0";pen=true;}else d+=`L${px},${py}`;});return d;};
+      out.lines=[...RT.topics.filter(t=>t!==s.topic),s.topic].map(t=>({d:seg(RT.series[t]),stroke:t===s.topic?ORANGE:"#c3cad2",w:t===s.topic?2.75:1.5}));
+      const sel=RT.series[s.topic],gaps=[];let g0=null;sel.forEach((val,h)=>{if(val==null&&g0==null)g0=h;if((val!=null||h===H-1)&&g0!=null){const e=val==null?h:h-1;gaps.push({x:X(Math.max(0,g0-0.5)),w:X(Math.min(H-1,e+0.5))-X(Math.max(0,g0-0.5))});g0=null;}});out.gaps=gaps;
+      const el=RT.series.election;let best=[0,-1],cur=null;el.forEach((val,h)=>{if(val!=null&&val>=0.45){if(cur==null)cur=h;if(h-cur>best[1]-best[0])best=[cur,h];}else cur=null;});
+      out.band={x:X(best[0]-0.5),w:X(best[1]+0.5)-X(best[0]-0.5),lx:X(best[1]+0.5)+8,label:`Campaign push · #election · ${hl(best[0])} – ${hl(best[1]).replace(/^day \d, /,"")}`};
+      out.tideScale=String(s.tide);
+      out.yTicks=[0,0.2,0.4,0.6,0.8].map(val=>({y:Y(val),ty:Y(val)+4,label:pct(val)}));
+      const gm=RT.ghost_by_hour;out.ghostTotal=gm.reduce((a,b)=>a+b,0);const bw=CW/H;
+      out.ghostBars=gm.map((n,h)=>({x:X(h)-bw*0.35,w:bw*0.7,y:n?4:26,h:n?26:4,fill:n?ORANGE:"#d3d9df"}));
+      const hh=s.hoverH;if(hh!=null){const val=sel[hh];out.hover={on:true,x:X(hh),y:val!=null?Y(Math.min(val,0.8)):0,has:val!=null,when:hl(hh),val:val!=null?pct(val,1)+" to automated-looking":"under 50 people · not published",left:(X(hh)/10)+"%",shift:hh>H*0.7?"calc(-100% - 12px)":"12px"};}else out.hover={on:false};
+      out.onChartMove=(e)=>{const r=e.currentTarget.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*1000,h=Math.round((vx-CL)/(CW/(H-1)));const c=Math.max(0,Math.min(H-1,h));if(c!==this.state.hoverH)this.setState({hoverH:c});};
+      out.onChartLeave=()=>this.setState({hoverH:null});
+      {const S=(RT.subs&&RT.subs[s.topic]&&RT.subs[s.topic].length?RT.subs[s.topic]:SUBS[s.topic])||[],vals=RT.series[s.topic].filter(z=>z!=null),par=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;
+       const hum=RT.audience_topics.filter(a=>a.topic===s.topic).reduce((a,b)=>a+b.human_accounts,0),norm=S.reduce((a,x)=>a+x.w*x.m,0)||1,maxw=Math.max(...S.map(x=>x.w));
+       const pubIdx=S.map((x,i)=>[i,x]).filter(([i,x])=>(x.ppl??Math.round(hum*x.w))>=50);
+       const si=s.sub??(pubIdx.sort((a,b)=>b[1].m-a[1].m)[0]||[0])[0];
+       out.subRows=S.map((x,i)=>{const sh=Math.min(0.95,par*x.m/norm),ppl=x.ppl??Math.round(hum*x.w),pub=ppl>=50,sel=i===si;
+         return {name:x.name,posts:pct(x.w)+" of posts",postsW:pct(x.w/maxw),wb:pub?pct(sh,1):"—",wbW:pub?pct(sh):"0%",wbColor:pub?(sh>=0.25?"#b8461b":INK):"#8a96a3",oneIn:pub?"1 in "+Math.max(1,Math.round(1/sh)):"under 50 · blank",ppl:fmt(ppl),bg:sel?"#fff":"transparent",border:sel?INK:(pub?"rgba(16,22,29,.1)":"#b9c1ca"),bstyle:pub?"solid":"dashed",onClick:()=>this.setState({sub:i})};});
+       const cur=S[si]||{name:"",ex:[]},curPub=(cur.ppl??Math.round(hum*cur.w))>=50;
+       out.subName=cur.name;out.subHasPosts=curPub&&cur.ex.length>0;out.subBlank=!curPub;
+       out.subPosts=curPub?cur.ex.map((e,j)=>({segs:e[0].split(/(\[\[.*?\]\])/).filter(Boolean).map(t=>{const h=t.startsWith("[[");return {t:h?t.slice(2,-2):t,bg:h?"rgba(235,104,52,.16)":"transparent",sh:h?"0 0 0 2px rgba(235,104,52,.16)":"none"};}),
+         tr:e[1],hasTr:!!e[1],signals:e[2],score:e[3].toFixed(2),scoreW:pct(e[3]),when:hl(e[4]),eng:`${fmt(e[5])} replies · ${fmt(e[6])} likes from people`,lang:e[7],nameW:(96+((j*37+cur.name.length*11)%70))+"px",handleW:(70+((j*23+cur.name.length*7)%50))+"px"})):[];}
+      const tp=RT.trend_peak;out.trendWhen=hl(tp.hour);
+      out.official=tp.official.map((o,i)=>({rank:i+1,name:o.topic==="other"?"Everything else":"#"+o.topic,sub:o.topic==="other"?"no single topic":`${fmt(o.posts)} posts · ${pct(o.share||0)} automated-looking`,ghost:!!o.ghost,bg:o.ghost?"rgba(235,104,52,.08)":"#fff",border:o.ghost?"rgba(235,104,52,.5)":"rgba(16,22,29,.1)"}));
+      out.realList=[0,1,2].map(i=>{const t=tp.real[i];return t?{rank:i+1,name:"#"+t,sub:t===(tp.official[i]||{}).topic?"same place":"moved from #"+(tp.official.findIndex(o=>o.topic===t)+1),color:INK,bg:"rgba(42,120,214,.05)",border:"rgba(42,120,214,.3)",bstyle:"solid"}:{rank:i+1,name:"—",sub:"under 50 people · left blank",color:MUTED,bg:"transparent",border:"#b9c1ca",bstyle:"dashed"};});
+    }
+
+    if(tab===1){
+      const mm=RT.regions.mismatch;
+      out.langTiles=LANGS.map(l=>{const a=(mm.find(m=>m.lang===l&&m.group==="automated")||{}).accounts||0,h=(mm.find(m=>m.lang===l&&m.group==="human")||{}).accounts||0;const sh=a/(a+h),sel=l===s.lang;
+        return {name:LN[l],big:a>=50?`1 in ${Math.round(1/sh)}`:"Clean",sub:a>=50?`accounts writing in ${LN[l]} are automated-looking (${fmt(a)} of ${fmt(a+h)})`:`fewer than 50 automated-looking accounts · no share published`,bg:sel?"#fff":"#f8f9fb",border:sel?INK:"rgba(16,22,29,.1)",onClick:()=>{this.setState({lang:l},()=>this.redrawMood());}};});
+      out.topicsHead=RT.topics;
+      out.grid=LANGS.map(l=>({name:LN[l],weight:l===s.lang?600:400,dot:l===s.lang?INK:"transparent",onClick:()=>this.setState({lang:l},()=>this.redrawMood()),
+        cells:RT.topics.map(t=>{const a=at(l,t),r=ll(l,t),vs=VSTYLE[r.verdict],sel=l===s.lang&&t===s.mtopic;
+          return {share:a.automated_accounts>=50?pct(a.automated_share):"—",numColor:a.automated_accounts>=50?INK:"#8a96a3",verdict:r.verdict,...vs,ring:sel?`0 0 0 2px ${INK}`:"none",onClick:()=>this.setState({lang:l,mtopic:t},()=>this.redrawMood())};})}));
+      out.verdictKey=Object.entries(VSTYLE).map(([k,vs])=>({name:k,...vs}));
+      const r=ll(s.lang,s.mtopic),MY=val=>20+(1-(val+1)/2)*236;
+      const smooth=arr=>arr?arr.map((_,i)=>{const w=arr.slice(Math.max(0,i-2),i+1).filter(z=>z!=null);return w.length?w.reduce((a,b)=>a+b,0)/w.length:null;}):null;
+      const path=arr=>{if(!arr)return "";let d="",pen=false;arr.forEach((val,h)=>{if(val==null){pen=false;return;}d+=(pen?"L":"M")+X(h).toFixed(1)+","+MY(Math.max(-1,Math.min(1,val))).toFixed(1);pen=true;});return d;};
+      const markers=[];
+      if(r.bot_first_turn_hour!=null)markers.push({h:r.bot_first_turn_hour,color:ORANGE,tcolor:INK,label:"automated turn · "+hl(r.bot_first_turn_hour)});
+      if(r.human_first_turn_hour!=null)markers.push({h:r.human_first_turn_hour,color:BLUE,tcolor:"#fff",label:"people turn · "+hl(r.human_first_turn_hour)});
+      markers.sort((a,b)=>a.h-b.h);
+      out.mood={hd:path(smooth(r.human_series)),bd:path(smooth(r.bot_series)),markers:markers.map((m,i)=>{const mx=X(m.h),bw=m.label.length*6.95+16,right=i===0&&markers.length>1;const by=i===0?4:32;const bx=right?mx-bw:mx;
+        return {x:mx,y0:by+22,color:m.color,tcolor:m.tcolor,label:m.label,bw,bx,by,tx:right?mx-8:mx+8,ty:by+15,anchor:right?"end":"start"};})};
+      out.moodTicks=[1,0.5,0,-0.5,-1].map(val=>({y:MY(val),ty:MY(val)+4,label:val===1?"+1":val===-1?"−1":val===0?"0":"",stroke:val===0?"rgba(16,22,29,.3)":"rgba(16,22,29,.07)"}));
+      out.drawW=s.drawn?"1000px":"0px";out.drawTrans=s.drawn?"width 1400ms cubic-bezier(.4,0,.2,1)":"none";
+      out.markerOp=s.markers?1:0;out.markerY=s.markers?"0px":"-8px";
+      out.moodTitle=`${LN[s.lang]} audience · #${s.mtopic}`;out.moodChip={name:r.verdict,...VSTYLE[r.verdict]};
+      out.moodWhy=r.why.charAt(0).toUpperCase()+r.why.slice(1)+".";
+      out.moodCheck=`${fmt(r.human_accounts)} people${r.automated_accounts?`, ${fmt(r.automated_accounts)} automated-looking`:""} in this cell.`;
+      out.soundLabel=s.sound?"Sound on":"Sound off";out.soundDot=s.sound?"#4fb37a":"#b9c1ca";
+      out.toggleSound=()=>this.setState({sound:!s.sound},()=>{if(this.state.sound)this.tick();});
+    }
+
+    if(tab===2){
+      out.langSeg=LANGS.map(l=>({name:LN[l],bg:l===s.lang?"#fff":"transparent",color:l===s.lang?INK:MUTED,onClick:()=>this.setState({lang:l})}));
+      const sd=this.sleepData();out.sleepN={h:fmt(sd.nh),a:sd.na>=50?fmt(sd.na):"under 50 · blank"};
+      out.sleepRows=sd.rows.map(r=>({name:RNAME[r.key],hW:pct(r.h),hL:pct(r.h),aW:r.a==null?"0%":pct(r.a),aL:r.a==null?"—":pct(r.a),bg:s.region===r.key?"#e9edf1":"transparent",enter:()=>this.setState({region:r.key}),leave:()=>this.setState({region:null})}));
+      const rr=sd.rows.find(r=>r.key===s.region);
+      out.globe=rr?{title:RNAME[rr.key],line:rr.key==="never sleeps"?`No quiet hours anywhere · people ${pct(rr.h)} · automated-looking ${rr.a==null?"—":pct(rr.a)}`:`People ${pct(rr.h)} · automated-looking ${rr.a==null?"—":pct(rr.a)}`}:{title:LN[s.lang]+" audience",line:"Drag to turn, or hover a region"};
+      out.gDown=(e)=>{this.dragging=true;this.touched=true;this.aim=null;this.ds=[e.clientX,e.clientY,(this.rot||[0,0])[0],(this.rot||[0,0])[1]];e.currentTarget.setPointerCapture&&e.currentTarget.setPointerCapture(e.pointerId);e.currentTarget.style.cursor="grabbing";};
+      out.gMove=(e)=>{if(!this.dragging||!this.rot)return;const k=180/(e.currentTarget.clientWidth*0.8);this.rot[0]=this.ds[2]+(e.clientX-this.ds[0])*k;this.rot[1]=Math.max(-80,Math.min(80,this.ds[3]-(e.clientY-this.ds[1])*k));};
+      out.gUp=(e)=>{this.dragging=false;e.currentTarget.style.cursor="grab";};
+      out.tzAcc=pct(v.timezone_within_2h);out.tzN=fmt(v.timezone_accounts_checked);
+      const mx=Math.max(...RT.flow.destinations.map(d=>d.bot_links));
+      out.links=RT.flow.destinations.map(d=>({domain:d.domain,bot:fmt(d.bot_links),human:fmt(d.human_links),bW:pct(d.bot_links/mx),hW:pct(d.human_links/mx,1)}));
+      out.flow=this.getFlow();out.flowN=fmt(RT.flow.automated_accounts);
+    }
+
+    if(tab===3){
+      out.valRows=[
+        {k:"Held-out accounts tested",d:`never seen in training (${fmt(v.n_train)} trained on)`,v:fmt(v.n_test)},
+        {k:"Precision",d:"of accounts flagged, share truly automated",v:pct(v.precision_at_threshold,1)},
+        {k:"Recall",d:"of automated accounts, share caught",v:pct(v.recall_at_threshold,1)},
+        {k:"False-alarm rate",d:"real people wrongly flagged",v:pct(v.false_alarm_rate,2)},
+        {k:"Time zone accuracy",d:`within 2 h · ${fmt(v.timezone_accounts_checked)} accounts checked`,v:pct(v.timezone_within_2h,1)}];
+      const im=Object.entries(v.importance).sort((a,b)=>b[1]-a[1]),top=im[0][1];
+      out.imp=im.map(([k,val])=>({name:IMPN[k]||k,v:pct(val,1),w:pct(val/top)}));
+      out.fcHead=pubFc.length?"Published":"Not published this run";
+      out.fcBody=pubFc.length?`Beat the naive guess on ${pubFc.length} topic(s).`:`Best topic, #${bestFc[0]}, scored ${bestFc[1].grade.skill_vs_naive>=0?"+":"−"}${Math.abs(bestFc[1].grade.skill_vs_naive*100).toFixed(1)}% against "tomorrow looks like today". A forecast that can't beat that guess stays unpublished.`;
+      out.flipDeg=s.flipped?"180deg":"0deg";out.flip=()=>this.setState({flipped:!s.flipped});
+      out.grades=Object.entries(RT.forecast).map(([k,f])=>{const sk=f.grade.skill_vs_naive||0,c=Math.max(-0.25,Math.min(0.25,sk)),w=Math.abs(c)/0.5*100;return {topic:k,v:(sk>=0?"+":"−")+Math.abs(sk*100).toFixed(1)+"%",left:(c<0?50-w:50)+"%",width:Math.max(0.6,w)+"%"};});
+      if(cell){const d=new Date(cell.created_day_index*864e5);
+      out.sleeper={has:true,n:cell.accounts,typ:cell.typical_per_day,title:`${cell.accounts} accounts created on the same day, silent, then awake together`,body:`Sign-ups on ${d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} against a usual ${cell.typical_per_day} a day. ${pct(cell.share_automated)} of them score as automated-looking.`,typH:Math.max(3,112*cell.typical_per_day/cell.accounts)+"px"};}
+      else out.sleeper={has:false,title:"No sleeper cell found in this source",body:"No sign-up day stands out against the usual rate. Instances with manual approval make sign-up waves rare."};
+      out.helpers=hd.accounts.helper;
+      out.rules=[
+        {t:"No names, ever",d:"Accounts become keyed pseudonyms before anything is stored. Nothing on this page can point to a person.",c:`accounts named: ${RT.privacy.accounts_named}`},
+        {t:"Deletes honored",d:"When someone deletes a post, the stored copy goes in the next purge run. Opt-outs are dropped at the gate.",c:"delete events purged each run"},
+        {t:"Groups of 50 or more",d:"Any group under 50 people is left blank, not shown as zero.",c:`MIN_GROUP = ${RT.min_group}`},
+        {t:"Short memory",d:`Raw text kept ${RT.privacy.text_retention_days} days, account habits ${RT.privacy.feature_retention_days} days. Then gone.`,c:`retention ${RT.privacy.text_retention_days} / ${RT.privacy.feature_retention_days} days`},
+        {t:"No look-up box",d:"You can't check anyone else's account here. Only group totals are published.",c:`individual lookup: ${RT.privacy.individual_lookup?"on":"off"}`},
+        {t:"Explanations by rules",d:"Every sentence on this page is written by fixed rules you can read, not generated by an AI.",c:"rules published with the code"}].map((r,i)=>({...r,n:"0"+(i+1)}));
+    }
+    return out;
+  }
+}
+</script>
+
+
+<script src="float.js"></script>
+</body></html>

@@ -1,0 +1,4 @@
+data/*.parquet
+data/results.json
+__pycache__/
+.pytest_cache/

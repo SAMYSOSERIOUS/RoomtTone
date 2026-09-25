@@ -1,0 +1,278 @@
+<title>Roomtone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#eef1f4;--panel:#ffffff;--line:#d9dfe6;--ink:#10161d;--ink-2:#46515e;--ink-3:#76818f;--grid:#e8ecf0;
+ --human:#2a78d6;--ghost:#eb6834;--ghost-soft:#fbe3d8;--helper:#1baf7a;--ok:#0ca30c;--warn:#d03b3b;
+ --t1:#2a78d6;--t2:#eb6834;--t3:#1baf7a;--t4:#eda100;--t5:#6250d6;
+ --display:"Instrument Serif",Georgia,serif;--body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1318;--panel:#171c23;--line:#2a323c;--ink:#f1f4f8;--ink-2:#b3bcc8;--ink-3:#8290a0;--grid:#222932;
+ --human:#3987e5;--ghost:#d95926;--ghost-soft:#3a2418;--helper:#199e70;--t1:#3987e5;--t2:#d95926;--t3:#199e70;--t4:#c98500;--t5:#9085e9}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1318;--panel:#171c23;--line:#2a323c;--ink:#f1f4f8;--ink-2:#b3bcc8;--ink-3:#8290a0;--grid:#222932;
+ --human:#3987e5;--ghost:#d95926;--ghost-soft:#3a2418;--helper:#199e70;--t1:#3987e5;--t2:#d95926;--t3:#199e70;--t4:#c98500;--t5:#9085e9}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:28px 16px 60px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:26px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(40px,7vw,72px);line-height:.98}
+h2{font-size:26px}
+h3{font-size:15px;font-weight:600;margin:0}
+p{margin:0}
+.mast{display:grid;gap:10px;border-bottom:1px solid var(--line);padding-bottom:18px}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.lede{max-width:64ch;font-size:17px;color:var(--ink-2)}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:stretch}
+.big{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 24px;display:grid;gap:6px;align-content:center}
+.big .n{font:400 96px/1 var(--display);font-variant-numeric:tabular-nums lining-nums;color:var(--ghost)}
+.big .n small{font-size:40px;color:var(--ink)}
+.big .what{font-size:16px;color:var(--ink-2);max-width:34ch}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:2px;align-content:start}
+.stat b{font:500 26px/1.15 var(--mono);font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--ink-2)}
+section{display:grid;gap:12px}
+.sec{display:grid;gap:4px}.sec p{color:var(--ink-2);max-width:70ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--body);font-size:12px;fill:var(--ink-2)}
+svg .ax{fill:var(--ink-3);font-size:11px}.gl{stroke:var(--grid)} .base{stroke:var(--line)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-2)}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+.lists{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.list{display:grid;gap:8px}.list h3{color:var(--ink-3);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.row .rank{font:500 13px var(--mono);color:var(--ink-3);width:18px}.row .t{font-weight:600;flex:1}
+.row .share{font:400 12px var(--mono);color:var(--ink-3)}
+.row.ghost{background:var(--ghost-soft);border-color:var(--ghost)}
+.tag{font:500 11px var(--mono);padding:3px 8px;border-radius:99px;border:1px solid var(--ghost);color:var(--ghost)}
+.note{font-size:13px;color:var(--ink-3)}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;color:var(--ink-3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.unpub{border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:10px 14px;background:var(--bg);font-size:14px}
+.ok{color:var(--ok);font-weight:600}
+.bars{display:grid;gap:6px}.bar{display:grid;grid-template-columns:130px 1fr 44px;gap:10px;align-items:center;font-size:13px}
+.bar .tr{height:10px;background:var(--grid);border-radius:4px;overflow:hidden}.bar .fl{height:100%;background:var(--human);border-radius:4px}
+.bar .v{font:400 12px var(--mono);text-align:right;color:var(--ink-2)}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rule{padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;display:grid;gap:3px}.rule b{font-size:14px}
+footer{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:14px;max-width:80ch}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font:500 12px/1.35 var(--body);padding:6px 9px;border-radius:6px;transform:translate(-50%,-125%);white-space:nowrap;z-index:9}
+@media (max-width:760px){.hero,.grid2,.lists,.rules{grid-template-columns:1fr}.big .n{font-size:72px}.bar{grid-template-columns:100px 1fr 44px}}
+
+.hm{display:grid;grid-template-columns:110px repeat(5,1fr);gap:6px;align-items:stretch}
+.hm .hd{font:500 11px var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;align-self:end;padding-bottom:4px}
+.hm .rl{font-weight:600;font-size:14px;display:flex;align-items:center}
+.hm .cell{border-radius:8px;padding:10px 10px;display:grid;gap:2px;min-height:64px;border:1px solid var(--line);cursor:default}
+.hm .cell b{font:500 18px/1.1 var(--mono)}.hm .cell span{font-size:11px;line-height:1.25}
+.v-steered{background:var(--ghost);color:#fff;border-color:var(--ghost)}.v-against{background:var(--ghost-soft);border-color:var(--ghost)}
+.v-mirror{background:var(--bg)}.v-clean{background:var(--panel)}.v-unclear{background:var(--bg);opacity:.75}
+.vleg{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--ink-2)}.vleg i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--line)}
+.moods{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.mood{display:grid;gap:6px}.mood h3 span{font-weight:400;color:var(--ink-3)}
+.verdict{font:500 11px var(--mono);padding:3px 8px;border-radius:99px;border:1px solid var(--line);color:var(--ink-2);margin-left:6px;vertical-align:middle}
+.origin{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.og{display:grid;gap:6px}.og h3 span{font-weight:400;color:var(--ink-3)}
+.orow{display:grid;grid-template-columns:140px 1fr;gap:8px;align-items:center;font-size:12.5px}
+.orow .tr{position:relative;height:16px;background:var(--grid);border-radius:4px;overflow:hidden}
+.orow .h{position:absolute;left:0;top:0;height:7px;background:var(--human);border-radius:3px}.orow .a{position:absolute;left:0;bottom:0;height:7px;background:var(--ghost);border-radius:3px}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:start}
+.flow .col{display:grid;gap:6px}.flow .col h3{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.flow .box{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);font-size:13px;display:flex;justify-content:space-between;gap:8px}
+.flow .box b{font:500 13px var(--mono)}.flow .arrow{font:400 28px var(--display);color:var(--ink-3);align-self:center;padding-top:22px}
+.dest{display:grid;gap:6px}.drow{display:grid;grid-template-columns:150px 1fr 1fr;gap:10px;font-size:13px;align-items:center}
+.drow .tr{height:8px;background:var(--grid);border-radius:4px;overflow:hidden}.drow .a{height:100%;background:var(--ghost)}.drow .h{height:100%;background:var(--human)}
+.drow .l{font-family:var(--mono);font-size:12px}
+@media (max-width:760px){.hm{grid-template-columns:70px repeat(5,1fr)}.hm .cell{padding:6px;min-height:52px}.hm .cell b{font-size:14px}.hm .cell span{display:none}.moods,.origin{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow .arrow{display:none}.drow{grid-template-columns:120px 1fr 1fr}}
+
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap}
+.nav button{font:500 13px var(--body);padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);cursor:pointer}
+.nav button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nav button:focus-visible{outline:2px solid var(--human);outline-offset:2px}
+.panel{display:grid;gap:22px}.panel[hidden]{display:none}
+.strip{display:grid;grid-template-columns:1fr 1.4fr;gap:14px;align-items:stretch}
+.changes{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.changes h3{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.changes h3 small{font:500 11px var(--mono);color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.changes ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;color:var(--ink-2)}
+.changes li::marker{color:var(--ghost)}
+.delta{font:500 13px var(--mono);color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{font:500 12.5px var(--body);padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ghost-soft);border-color:var(--ghost);color:var(--ink)}
+.hm .cell{cursor:pointer}.hm .cell.sel{outline:2px solid var(--ink);outline-offset:1px}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.qhead{display:grid;gap:4px}.qhead h2{font-size:30px}.qhead p{color:var(--ink-2);max-width:72ch}
+@media (max-width:760px){.strip,.two{grid-template-columns:1fr}.qhead h2{font-size:26px}}
+</style>
+<div class="wrap">
+<header class="mast">
+  <div class="kicker">Roomtone · attention report · 72 hours · practice data · updates every hour when live</div>
+  <h1>How much of the room is empty?</h1>
+  <p class="lede">Roomtone counts the human attention that goes to machines, shows what is really trending once the ghosts are removed, and works out who is steering whom, from where, toward what. It never names an account. Four questions, one page.</p>
+</header>
+
+<div class="strip">
+  <div class="big">
+    <div class="kicker">Wasted Breath Index · last 24 hours</div>
+    <div class="n">1 <small>in</small> __ONE_IN__</div>
+    <p class="what">human replies and likes landed on an automated-looking account: <b>__TO_AUTO__</b> of <b>__ENG__</b>.</p>
+    <p class="delta" id="delta"></p>
+  </div>
+  <div class="changes"><h3>What changed in the last 24 hours <small>written by rules, not by an AI</small></h3><ul id="changes"></ul></div>
+</div>
+<div class="stats" style="grid-template-columns:repeat(4,1fr)">
+  <div class="stat"><b>__GHOST__ of __SLOTS__</b><span>hourly trend slots were ghost-made over 72 h</span></div>
+  <div class="stat"><b>__IMM__ h</b><span>immune response: hours until humans dropped the manufactured __HOT__ trend</span></div>
+  <div class="stat"><b>__NAUTO__</b><span>automated-looking accounts among __NTOT__ scored; __NHELP__ declared helpers kept apart</span></div>
+  <div class="stat"><b>__FAR__%</b><span>false-alarm rate, measured on held-out accounts</span></div>
+</div>
+
+<nav class="nav" role="tablist" aria-label="Questions">
+  <button role="tab" data-p="p1" aria-selected="true">1 · How much attention is lost?</button>
+  <button role="tab" data-p="p2" aria-selected="false">2 · Who steers whom?</button>
+  <button role="tab" data-p="p3" aria-selected="false">3 · Where from, where to?</button>
+  <button role="tab" data-p="p4" aria-selected="false">4 · Can we trust it?</button>
+</nav>
+
+<div class="panel" id="p1" role="tabpanel">
+  <div class="qhead"><h2>How much attention is lost, and on what?</h2><p>Share of human replies and likes on each topic that went to automated-looking accounts, hour by hour. Pick a topic to bring it forward; the others stay as context. Hours with fewer than 50 human accounts are blank, not published.</p></div>
+  <div class="card"><div class="chips" id="tchips"></div><div id="c-wb"></div></div>
+  <div class="two">
+    <div class="card">
+      <h3>What's really trending <span class="note">· at the push peak, hour __PEAK__</span></h3>
+      <div class="lists">
+        <div class="list"><h3>Looks popular · official</h3><div id="l-off"></div></div>
+        <div class="list"><h3>Actually popular · ghost-free</h3><div id="l-real"></div></div>
+      </div>
+    </div>
+    <div class="card"><h3>Ghost-made trend slots per hour</h3><div id="c-ghost"></div><p class="note">They cluster inside the push and in the small hours of the night, when people sleep and scripts do not.</p></div>
+  </div>
+</div>
+
+<div class="panel" id="p2" role="tabpanel" hidden>
+  <div class="qhead"><h2>Who steers whom?</h2><p>Every audience (the language an account writes in) crossed with every topic. Each cell: the share of posts from automated-looking accounts, and the mood test's verdict. Click a row to open that audience below.</p></div>
+  <div class="card">
+    <div class="stats" id="wbl" style="grid-template-columns:repeat(4,1fr)"></div>
+    <div class="hm" id="hm"></div>
+    <div class="vleg"><span><i style="background:var(--ghost)"></i>steered: bots turned first, humans followed</span><span><i style="background:var(--ghost-soft);border-color:var(--ghost)"></i>against locals: bots push, humans hold</span><span><i style="background:var(--bg)"></i>mirror: bots copy the human mood</span><span><i style="background:var(--panel)"></i>clean: almost no bots</span></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h3 id="mood-title">Mood on __HOT__</h3><div class="chips" id="achips"></div></div>
+    <p class="note">Hourly mood of human posts (blue) and automated posts (orange), −1 negative to +1 positive, 3-hour average. Dashed lines mark the first lasting turn of each side.</p>
+    <div id="c-mood"></div>
+    <p id="mood-why" style="color:var(--ink-2)"></p>
+  </div>
+</div>
+
+<div class="panel" id="p3" role="tabpanel" hidden>
+  <div class="qhead"><h2>Where do the ghosts come from, and where do they push people?</h2><p>An account's quiet hours give away its time zone, whatever its profile says. The estimate is right to within 2 hours for __TZACC__ of __TZN__ practice accounts with a known location: it can tell continents apart, not neighbouring countries. Used for group totals only.</p></div>
+  <div class="two">
+    <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h3 id="origin-title">Where they sleep</h3><div class="chips" id="ochips"></div></div><div id="origin"></div><p class="note" id="origin-note"></p></div>
+    <div class="card"><h3>Links pushed during the campaign</h3><div class="dest" id="dest"></div><p class="note" id="targets"></p></div>
+  </div>
+  <div class="card"><h3>The __HOT__ campaign, end to end</h3><div class="flow" id="flow"></div></div>
+</div>
+
+<div class="panel" id="p4" role="tabpanel" hidden>
+  <div class="qhead"><h2>Can we trust it?</h2><p>Every number above comes with a published check. If a check fails, the feature stays off the page and the page says so.</p></div>
+  <div class="two">
+    <div class="card"><h3>How the score performed on accounts it had never seen</h3>
+      <table><tr><th>Check</th><th>Result</th></tr>
+      <tr><td>Held-out accounts tested</td><td class="num">__NTEST__</td></tr>
+      <tr><td>Flagged accounts that really looked automated (precision)</td><td class="num">__PREC__</td></tr>
+      <tr><td>Automated accounts caught (recall)</td><td class="num">__REC__</td></tr>
+      <tr><td>Real people wrongly flagged (false-alarm rate)</td><td class="num">__FAR__%</td></tr>
+      <tr><td>Time zone estimate within 2 hours</td><td class="num">__TZACC__</td></tr></table>
+      <p class="note">Practice data is easier than real data. On a live stream these numbers will be worse, and they will be published anyway.</p></div>
+    <div class="card"><h3>What gave the ghosts away</h3><div class="bars" id="imp"></div><p class="note">Rhythm and stock phrases did most of the work on this stream; the regret rate (real people delete and edit, scripts rarely do) is small but hard to fake.</p></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>Ghost forecast · __PUB__ this run</h3><div class="unpub">The forecast for tomorrow's ghost share must beat the dumbest guess, "tomorrow looks like today", before it goes public. Skill this run: __SKILL__ (above 0.1 is publishable). A push that makes day 3 unlike day 2 is exactly what breaks a naive forecast, and the page says so instead of pretending.</div></div>
+    <div class="card"><h3>Sleeper cell found</h3><div style="font:400 40px/1 var(--display)">__CELL__ accounts</div><p style="color:var(--ink-2)">created on the same day, against a typical __TYP__ per day, silent, then awake together during the push. Reported as a batch; no account is named.</p></div>
+  </div>
+  <div class="rules">
+    <div class="rule"><b>No names, ever</b>Account IDs are replaced by a keyed scrambled code before storage. Accounts named on this page: 0.</div>
+    <div class="rule"><b>Deletes honored</b>A deleted post loses its text in the store; only the fact of a delete survives, as the regret signal.</div>
+    <div class="rule"><b>Groups of 50 or more</b>Any hour, topic or audience with fewer human accounts is left blank instead of published.</div>
+    <div class="rule"><b>Short memory</b>Text is kept 30 days, habit numbers 90 days, then purged automatically.</div>
+    <div class="rule"><b>No look-up box</b>Nobody can check someone else's score. The ghost-free feed hides posts; it labels no one.</div>
+    <div class="rule"><b>Explanations by rules</b>Every sentence on this page is produced by fixed rules from the numbers, so it can be audited. No language model rewrites results.</div>
+  </div>
+</div>
+
+<footer>The __NEV__ events behind this page were generated by Roomtone's simulator to look like a real stream: 2,400 people in four languages who sleep and sometimes delete, 300 scripts in three styles that sleep in their operators' time zones, 60 declared helper bots, and 120 sleeper accounts born on one day. The campaign scenarios were written into the practice data so the tests could be checked; on real data the verdicts are whatever the data says. Run <code>scripts/run_demo.sh</code> then <code>python report/build_report.py</code> to reproduce it.</footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+<script>
+const D=__DATA__;
+const NS="http://www.w3.org/2000/svg",tip=document.getElementById("tip");
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+const hover=(n,f)=>{n.addEventListener("pointermove",e=>{tip.textContent=f(e);tip.hidden=false;tip.style.left=e.clientX+"px";tip.style.top=e.clientY+"px"});n.addEventListener("pointerleave",()=>tip.hidden=true)};
+const hl=h=>{const d=Math.floor(h/24)+1,x=h%24;return "day "+d+", "+(x===0?"12am":x===12?"12pm":x<12?x+"am":(x-12)+"pm")};
+const pct=v=>v==null?"–":Math.round(v*100)+"%";
+const chips=(id,items,sel,label,on)=>{const c=document.getElementById(id);c.innerHTML="";items.forEach(k=>{const b=document.createElement("button");b.textContent=label(k);b.setAttribute("aria-pressed",k===sel);b.onclick=()=>on(k);c.appendChild(b)})};
+// tabs
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.setAttribute("aria-selected",x===b));document.querySelectorAll(".panel").forEach(p=>p.hidden=p.id!==b.dataset.p)});
+// status strip
+document.getElementById("changes").innerHTML=D.changes.map(c=>`<li>${c}</li>`).join("");
+if(D.one_in_prev)document.getElementById("delta").textContent="previous 24 h: 1 in "+D.one_in_prev;
+// 1. wasted breath with topic emphasis
+let topic=D.hot;
+function drawWB(){const box=document.getElementById("c-wb");box.innerHTML="";const W=1000,H=280,m={l:40,r:50,t:16,b:30},iw=W-m.l-m.r,ih=H-m.t-m.b,s=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"});
+const x=h=>m.l+h/(D.H-1)*iw,y=v=>m.t+ih-v*ih;
+el("rect",{x:x(35),y:m.t,width:x(40)-x(35),height:ih,fill:"var(--ghost)",opacity:.08},s);const pl=el("text",{x:x(37.5),y:m.t+12,"text-anchor":"middle",class:"ax"},s);pl.textContent=D.hot+" push";
+[0,.25,.5,.75,1].forEach(g=>{el("line",{x1:m.l,x2:W-m.r,y1:y(g),y2:y(g),class:g?"gl":"base"},s);const t=el("text",{x:m.l-6,y:y(g)+4,"text-anchor":"end",class:"ax"},s);t.textContent=Math.round(g*100)+"%"});
+for(let h=0;h<D.H;h+=12){const t=el("text",{x:x(h),y:H-8,"text-anchor":"middle",class:"ax"},s);t.textContent=h%24===0?"day "+(h/24+1):"noon"}
+const line=(t,c,w,o)=>{let d="",pen=false;D.series[t].forEach((p,i)=>{if(p==null){pen=false;return}d+=(pen?" L":" M")+x(i)+","+y(p);pen=true});el("path",{d,fill:"none",stroke:c,"stroke-width":w,"stroke-linejoin":"round",opacity:o},s)};
+D.topics.filter(t=>t!==topic).forEach(t=>line(t,"var(--ink-3)",1.2,.35));line(topic,"var(--ghost)",2.5,1);
+const last=D.series[topic].map((v,i)=>[v,i]).filter(a=>a[0]!=null).pop();if(last){el("circle",{cx:x(last[1]),cy:y(last[0]),r:5,fill:"var(--ghost)",stroke:"var(--panel)","stroke-width":2},s);const t=el("text",{x:x(last[1])+8,y:y(last[0])+4,"text-anchor":"start",class:"val"},s);t.textContent=pct(last[0])}
+const hit=el("rect",{x:m.l,y:m.t,width:iw,height:ih,fill:"transparent"},s);hover(hit,e=>{const r=s.getBoundingClientRect(),h=Math.max(0,Math.min(D.H-1,Math.round(((e.clientX-r.left)/r.width*W-m.l)/iw*(D.H-1))));return hl(h)+" · "+topic+" "+pct(D.series[topic][h])+" · others "+D.topics.filter(t=>t!==topic).map(t=>pct(D.series[t][h])).join("/")});
+box.appendChild(s)}
+chips("tchips",D.topics,topic,t=>t,t=>{topic=t;chips("tchips",D.topics,topic,x=>x,arguments.callee);drawWB()});drawWB();
+// trending + ghost-made
+const off=document.getElementById("l-off"),real=document.getElementById("l-real");
+D.peak_official.forEach((o,i)=>off.insertAdjacentHTML("beforeend",`<div class="row${o.ghost?" ghost":""}"><span class="rank">${i+1}</span><span class="t">${o.topic}</span><span class="share">${Math.round(o.share*100)}% automated</span>${o.ghost?'<span class="tag">ghost-made</span>':""}</div>`));
+D.peak_real.forEach((t,i)=>real.insertAdjacentHTML("beforeend",`<div class="row"><span class="rank">${i+1}</span><span class="t">${t}</span></div>`));
+(function(){const W=480,H=150,m={l:24,r:10,t:10,b:22},iw=W-m.l-m.r,ih=H-m.t-m.b,s=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"}),n=D.H,step=iw/n,max=3;
+el("line",{x1:m.l,x2:W-m.r,y1:m.t+ih,y2:m.t+ih,class:"base"},s);
+D.ghost_by_hour.forEach((v,i)=>{if(v){el("rect",{x:m.l+i*step+1,y:m.t+ih-v/max*ih,width:step-2,height:v/max*ih,rx:2,fill:"var(--ghost)"},s)}const hit=el("rect",{x:m.l+i*step,y:m.t,width:step,height:ih,fill:"transparent"},s);hover(hit,()=>hl(i)+": "+v+" ghost-made slot"+(v===1?"":"s"))});
+for(let h=0;h<n;h+=24){const t=el("text",{x:m.l+h*step,y:H-6,class:"ax"},s);t.textContent="day "+(h/24+1)}
+document.getElementById("c-ghost").appendChild(s)})();
+// 2. audience grid + mood drill-down
+let aud=D.hot_audience;
+const wbl=document.getElementById("wbl");
+D.langs.forEach(l=>{const w=D.wb_lang[l];wbl.insertAdjacentHTML("beforeend",`<div class="stat"><b>${w?"1 in "+Math.max(1,Math.round(1/Math.max(w.share,0.001))):"–"}</b><span>${D.LANG[l]||l} audience: replies and likes that went to machines, last 24 h (${w?w.humans:0} people)</span></div>`)});
+const hm=document.getElementById("hm");hm.insertAdjacentHTML("beforeend",'<div></div>'+D.topics.map(t=>`<div class="hd">${t}</div>`).join(""));
+D.langs.forEach(l=>{hm.insertAdjacentHTML("beforeend",`<div class="rl">${D.LANG[l]||l}</div>`);D.topics.forEach(t=>{const c=D.grid.find(g=>g.lang===l&&g.topic===t);const v=(c.verdict||"").split(" ")[0].replace("not","unclear");
+const d=document.createElement("div");d.className="cell v-"+v;d.dataset.l=l;d.innerHTML=`<b>${pct(c.share)}</b><span>${c.verdict}</span>`;hover(d,()=>`${D.LANG[l]} · ${t}: ${pct(c.share)} automated · ${c.humans} people, ${c.bots} automated · mood people ${c.human_mood} vs bots ${c.bot_mood==null?"–":c.bot_mood}. ${c.why}`);d.onclick=()=>selectAud(l);hm.appendChild(d)})});
+function drawMood(){const m=D.mood[aud],box=document.getElementById("c-mood");box.innerHTML="";document.getElementById("mood-title").innerHTML=`${D.LANG[aud]||aud} audience · mood on ${D.hot} <span class="verdict">${m?m.verdict:"n/a"}</span>`;document.getElementById("mood-why").textContent=m?m.why||"":"";if(!m)return;
+const W=1000,H=220,mg={l:34,r:14,t:16,b:24},iw=W-mg.l-mg.r,ih=H-mg.t-mg.b,n=m.human.length,s=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"}),x=i=>mg.l+i/(n-1)*iw,y=v=>mg.t+ih/2-v*ih/2;
+[-1,-.5,0,.5,1].forEach(g=>{el("line",{x1:mg.l,x2:W-mg.r,y1:y(g),y2:y(g),class:g?"gl":"base"},s);const t=el("text",{x:mg.l-6,y:y(g)+4,"text-anchor":"end",class:"ax"},s);t.textContent=g>0?"+"+g:g});
+for(let h=0;h<n;h+=12){const t=el("text",{x:x(h),y:H-6,"text-anchor":"middle",class:"ax"},s);t.textContent=h%24===0?"day "+(h/24+1):"noon"}
+const line=(arr,c)=>{let d="",pen=false;arr.forEach((p,i)=>{if(p==null){pen=false;return}d+=(pen?" L":" M")+x(i)+","+y(p);pen=true});el("path",{d,fill:"none",stroke:c,"stroke-width":2.2,"stroke-linejoin":"round"},s)};
+line(m.human,"var(--human)");line(m.bot,"var(--ghost)");
+const mark=(h,c,lab,yy)=>{if(h==null)return;el("line",{x1:x(h),x2:x(h),y1:mg.t,y2:mg.t+ih,stroke:c,"stroke-dasharray":"4 4"},s);const t=el("text",{x:x(h)+5,y:yy,class:"ax"},s);t.textContent=lab+" turn · "+hl(h)};
+mark(m.bt,"var(--ghost)","bots",mg.t+12);mark(m.ht,"var(--human)","humans",mg.t+ih-6);
+const lg=[["Humans","var(--human)"],["Automated","var(--ghost)"]];lg.forEach(([n2,c],i)=>{el("rect",{x:W-mg.r-170+i*90,y:mg.t-2,width:12,height:3,fill:c},s);const t=el("text",{x:W-mg.r-154+i*90,y:mg.t+3,class:"ax"},s);t.textContent=n2});
+const hit=el("rect",{x:mg.l,y:mg.t,width:iw,height:ih,fill:"transparent"},s);hover(hit,e=>{const r=s.getBoundingClientRect(),h=Math.max(0,Math.min(n-1,Math.round(((e.clientX-r.left)/r.width*W-mg.l)/iw*(n-1))));return hl(h)+": humans "+(m.human[h]==null?"–":m.human[h])+" · bots "+(m.bot[h]==null?"–":m.bot[h])});
+box.appendChild(s)}
+function drawOrigin(){const o=D.origin[aud],box=document.getElementById("origin");box.innerHTML="";const mh=D.mism[aud+"|human"],ma=D.mism[aud+"|automated"];
+document.getElementById("origin-title").textContent=`Where they sleep · ${D.LANG[aud]||aud} audience`;
+if(!ma||!o){box.innerHTML='<p class="note">Fewer than 50 automated accounts write to this audience; nothing to show.</p>';document.getElementById("origin-note").textContent="";return}
+box.innerHTML='<div class="legend" style="margin-bottom:8px"><span><i style="background:var(--human)"></i>'+(mh?mh.accounts:0)+' people</span><span><i style="background:var(--ghost)"></i>'+ma.accounts+' automated</span></div>'+D.regions.map(rg=>`<div class="orow"><span>${rg}</span><div class="tr"><div class="h" style="width:${Math.round((o.human[rg]||0)*100)}%"></div><div class="a" style="width:${Math.round((o.automated[rg]||0)*100)}%"></div></div></div>`).join("");
+document.getElementById("origin-note").textContent=`Never sleeps: ${pct(mh?mh.never_sleeps_rate:null)} of people, ${pct(ma.never_sleeps_rate)} of automated accounts. An account with no quiet stretch in its day is either a script or a very tired person.`}
+function selectAud(l){aud=l;document.querySelectorAll(".hm .cell").forEach(c=>c.classList.toggle("sel",c.dataset.l===l));chips("achips",D.langs,aud,k=>D.LANG[k]||k,selectAud);chips("ochips",D.langs,aud,k=>D.LANG[k]||k,selectAud);drawMood();drawOrigin()}
+selectAud(aud);
+// 3. flow + destinations
+const f=D.flow,fl=document.getElementById("flow");
+const colBox=(title,obj,fmt)=>`<div class="col"><h3>${title}</h3>${Object.entries(obj).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="box"><span>${fmt?fmt(k):k}</span><b>${v}</b></div>`).join("")}</div>`;
+const lean=k=>{const d=f.direction[k];return d==null?"":(d<-0.3?"pushing negative ("+d+")":d>0.3?"pushing positive ("+d+")":"neutral ("+d+")")};
+fl.innerHTML=colBox("Where they sleep",f.origin)+'<div class="arrow">→</div>'+colBox("Audience they write to",f.audience,k=>`${D.LANG[k]||k}<br><span class="note">${lean(k)}</span>`)+'<div class="arrow">→</div>'+`<div class="col"><h3>Real people they replied to</h3>${Object.entries(f.humans_targeted_by_replies).map(([k,v])=>`<div class="box"><span>${D.LANG[k]||k}</span><b>${v}</b></div>`).join("")}<p class="note">counts of distinct people, never names</p></div>`;
+const dest=document.getElementById("dest");const mx=Math.max(...f.destinations.map(d=>Math.max(d.bot_links,d.human_links)));
+dest.insertAdjacentHTML("beforeend",`<div class="drow"><span class="kicker">Website</span><span class="kicker" style="color:var(--ghost)">linked by automated accounts</span><span class="kicker" style="color:var(--human)">linked by real people</span></div>`);
+f.destinations.forEach(d=>dest.insertAdjacentHTML("beforeend",`<div class="drow"><span class="l">${d.domain}</span><div><div class="tr"><div class="a" style="width:${Math.round(d.bot_links/mx*100)}%"></div></div><span class="note">${d.bot_links}</span></div><div><div class="tr"><div class="h" style="width:${Math.round(d.human_links/mx*100)}%"></div></div><span class="note">${d.human_links}</span></div></div>`));
+document.getElementById("targets").textContent=`${f.automated_accounts} automated-looking accounts took part in the ${f.topic} push. Three websites were linked almost only by them; the sites real people link to barely appear in their posts. That asymmetry is the destination of the campaign.`;
+// 4. importance
+const imp=document.getElementById("imp"),names={rhythm_cv:"Posting rhythm",ai_phrase_rate:"Stock phrases",posts_per_day:"Posts per day",regret_rate:"Regret rate",signup_wave:"Sign-up wave",sleep_gap_h:"Sleep gap"};
+Object.entries(D.validation.importance||{}).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>imp.insertAdjacentHTML("beforeend",`<div class="bar"><span>${names[k]||k}</span><div class="tr"><div class="fl" style="width:${Math.max(1,v*100)}%"></div></div><span class="v">${Math.round(v*100)}%</span></div>`));
+</script>
